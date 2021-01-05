@@ -1,0 +1,2 @@
+/usr/bin/ar qc libomega.a CMakeFiles/omega.dir/omega.cpp.o
+/usr/bin/ranlib libomega.a

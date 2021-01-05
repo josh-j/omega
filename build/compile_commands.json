@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/joshj/Projects/omega/build",
+  "command": "/usr/bin/clang++   -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -o CMakeFiles/omega.dir/omega.cpp.o -c /Users/joshj/Projects/omega/omega.cpp",
+  "file": "/Users/joshj/Projects/omega/omega.cpp"
+}
+]
