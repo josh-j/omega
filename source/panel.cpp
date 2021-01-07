@@ -1,25 +1,20 @@
-#include <state.hpp>
-#include <assert.h>
 #include "panel.hpp"
+
+#include <assert.h>
+
+#include <state.hpp>
 
 namespace Panel {
 
-
-void Begin() {
-    ++s.level;
-}
+void Begin() { ++s.level; }
 
 void End() {
-    assert(s.level > 0);
-    --s.level;
+  assert(s.level > 0);
+  --s.level;
 }
 
-void BeginChild() {
+void BeginChild() {}
 
-}
+void EndChild() {}
 
-void EndChild() {
-
-}
-
-}
+}  // namespace Panel
