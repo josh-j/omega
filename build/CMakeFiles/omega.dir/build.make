@@ -76,35 +76,94 @@ include CMakeFiles/omega.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/omega.dir/flags.make
 
-CMakeFiles/omega.dir/omega.cpp.o: CMakeFiles/omega.dir/flags.make
-CMakeFiles/omega.dir/omega.cpp.o: ../omega.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/omega.dir/omega.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/omega.dir/omega.cpp.o -c /Users/joshj/Projects/omega/omega.cpp
+CMakeFiles/omega.dir/source/button.cc.o: CMakeFiles/omega.dir/flags.make
+CMakeFiles/omega.dir/source/button.cc.o: ../source/button.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/omega.dir/source/button.cc.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/omega.dir/source/button.cc.o -c /Users/joshj/Projects/omega/source/button.cc
 
-CMakeFiles/omega.dir/omega.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/omega.dir/omega.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshj/Projects/omega/omega.cpp > CMakeFiles/omega.dir/omega.cpp.i
+CMakeFiles/omega.dir/source/button.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/omega.dir/source/button.cc.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshj/Projects/omega/source/button.cc > CMakeFiles/omega.dir/source/button.cc.i
 
-CMakeFiles/omega.dir/omega.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/omega.dir/omega.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshj/Projects/omega/omega.cpp -o CMakeFiles/omega.dir/omega.cpp.s
+CMakeFiles/omega.dir/source/button.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/omega.dir/source/button.cc.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshj/Projects/omega/source/button.cc -o CMakeFiles/omega.dir/source/button.cc.s
+
+CMakeFiles/omega.dir/source/panel.cc.o: CMakeFiles/omega.dir/flags.make
+CMakeFiles/omega.dir/source/panel.cc.o: ../source/panel.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/omega.dir/source/panel.cc.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/omega.dir/source/panel.cc.o -c /Users/joshj/Projects/omega/source/panel.cc
+
+CMakeFiles/omega.dir/source/panel.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/omega.dir/source/panel.cc.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshj/Projects/omega/source/panel.cc > CMakeFiles/omega.dir/source/panel.cc.i
+
+CMakeFiles/omega.dir/source/panel.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/omega.dir/source/panel.cc.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshj/Projects/omega/source/panel.cc -o CMakeFiles/omega.dir/source/panel.cc.s
+
+CMakeFiles/omega.dir/source/state.cc.o: CMakeFiles/omega.dir/flags.make
+CMakeFiles/omega.dir/source/state.cc.o: ../source/state.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/omega.dir/source/state.cc.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/omega.dir/source/state.cc.o -c /Users/joshj/Projects/omega/source/state.cc
+
+CMakeFiles/omega.dir/source/state.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/omega.dir/source/state.cc.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshj/Projects/omega/source/state.cc > CMakeFiles/omega.dir/source/state.cc.i
+
+CMakeFiles/omega.dir/source/state.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/omega.dir/source/state.cc.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshj/Projects/omega/source/state.cc -o CMakeFiles/omega.dir/source/state.cc.s
+
+CMakeFiles/omega.dir/source/text.cc.o: CMakeFiles/omega.dir/flags.make
+CMakeFiles/omega.dir/source/text.cc.o: ../source/text.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/omega.dir/source/text.cc.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/omega.dir/source/text.cc.o -c /Users/joshj/Projects/omega/source/text.cc
+
+CMakeFiles/omega.dir/source/text.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/omega.dir/source/text.cc.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshj/Projects/omega/source/text.cc > CMakeFiles/omega.dir/source/text.cc.i
+
+CMakeFiles/omega.dir/source/text.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/omega.dir/source/text.cc.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshj/Projects/omega/source/text.cc -o CMakeFiles/omega.dir/source/text.cc.s
+
+CMakeFiles/omega.dir/source/window.cc.o: CMakeFiles/omega.dir/flags.make
+CMakeFiles/omega.dir/source/window.cc.o: ../source/window.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/omega.dir/source/window.cc.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/omega.dir/source/window.cc.o -c /Users/joshj/Projects/omega/source/window.cc
+
+CMakeFiles/omega.dir/source/window.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/omega.dir/source/window.cc.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshj/Projects/omega/source/window.cc > CMakeFiles/omega.dir/source/window.cc.i
+
+CMakeFiles/omega.dir/source/window.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/omega.dir/source/window.cc.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshj/Projects/omega/source/window.cc -o CMakeFiles/omega.dir/source/window.cc.s
 
 # Object files for target omega
 omega_OBJECTS = \
-"CMakeFiles/omega.dir/omega.cpp.o"
+"CMakeFiles/omega.dir/source/button.cc.o" \
+"CMakeFiles/omega.dir/source/panel.cc.o" \
+"CMakeFiles/omega.dir/source/state.cc.o" \
+"CMakeFiles/omega.dir/source/text.cc.o" \
+"CMakeFiles/omega.dir/source/window.cc.o"
 
 # External object files for target omega
 omega_EXTERNAL_OBJECTS =
 
-libomega.a: CMakeFiles/omega.dir/omega.cpp.o
-libomega.a: CMakeFiles/omega.dir/build.make
-libomega.a: CMakeFiles/omega.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libomega.a"
-	$(CMAKE_COMMAND) -P CMakeFiles/omega.dir/cmake_clean_target.cmake
+libomega.dylib: CMakeFiles/omega.dir/source/button.cc.o
+libomega.dylib: CMakeFiles/omega.dir/source/panel.cc.o
+libomega.dylib: CMakeFiles/omega.dir/source/state.cc.o
+libomega.dylib: CMakeFiles/omega.dir/source/text.cc.o
+libomega.dylib: CMakeFiles/omega.dir/source/window.cc.o
+libomega.dylib: CMakeFiles/omega.dir/build.make
+libomega.dylib: CMakeFiles/omega.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/joshj/Projects/omega/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libomega.dylib"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/omega.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/omega.dir/build: libomega.a
+CMakeFiles/omega.dir/build: libomega.dylib
 
 .PHONY : CMakeFiles/omega.dir/build
 

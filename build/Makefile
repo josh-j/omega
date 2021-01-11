@@ -539,32 +539,140 @@ Experimental/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Experimental.dir/build.make CMakeFiles/Experimental.dir/build
 .PHONY : Experimental/fast
 
-omega.o: omega.cpp.o
+source/button.o: source/button.cc.o
 
-.PHONY : omega.o
+.PHONY : source/button.o
 
 # target to build an object file
-omega.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/omega.cpp.o
-.PHONY : omega.cpp.o
+source/button.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/button.cc.o
+.PHONY : source/button.cc.o
 
-omega.i: omega.cpp.i
+source/button.i: source/button.cc.i
 
-.PHONY : omega.i
+.PHONY : source/button.i
 
 # target to preprocess a source file
-omega.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/omega.cpp.i
-.PHONY : omega.cpp.i
+source/button.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/button.cc.i
+.PHONY : source/button.cc.i
 
-omega.s: omega.cpp.s
+source/button.s: source/button.cc.s
 
-.PHONY : omega.s
+.PHONY : source/button.s
 
 # target to generate assembly for a file
-omega.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/omega.cpp.s
-.PHONY : omega.cpp.s
+source/button.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/button.cc.s
+.PHONY : source/button.cc.s
+
+source/panel.o: source/panel.cc.o
+
+.PHONY : source/panel.o
+
+# target to build an object file
+source/panel.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/panel.cc.o
+.PHONY : source/panel.cc.o
+
+source/panel.i: source/panel.cc.i
+
+.PHONY : source/panel.i
+
+# target to preprocess a source file
+source/panel.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/panel.cc.i
+.PHONY : source/panel.cc.i
+
+source/panel.s: source/panel.cc.s
+
+.PHONY : source/panel.s
+
+# target to generate assembly for a file
+source/panel.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/panel.cc.s
+.PHONY : source/panel.cc.s
+
+source/state.o: source/state.cc.o
+
+.PHONY : source/state.o
+
+# target to build an object file
+source/state.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/state.cc.o
+.PHONY : source/state.cc.o
+
+source/state.i: source/state.cc.i
+
+.PHONY : source/state.i
+
+# target to preprocess a source file
+source/state.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/state.cc.i
+.PHONY : source/state.cc.i
+
+source/state.s: source/state.cc.s
+
+.PHONY : source/state.s
+
+# target to generate assembly for a file
+source/state.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/state.cc.s
+.PHONY : source/state.cc.s
+
+source/text.o: source/text.cc.o
+
+.PHONY : source/text.o
+
+# target to build an object file
+source/text.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/text.cc.o
+.PHONY : source/text.cc.o
+
+source/text.i: source/text.cc.i
+
+.PHONY : source/text.i
+
+# target to preprocess a source file
+source/text.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/text.cc.i
+.PHONY : source/text.cc.i
+
+source/text.s: source/text.cc.s
+
+.PHONY : source/text.s
+
+# target to generate assembly for a file
+source/text.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/text.cc.s
+.PHONY : source/text.cc.s
+
+source/window.o: source/window.cc.o
+
+.PHONY : source/window.o
+
+# target to build an object file
+source/window.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/window.cc.o
+.PHONY : source/window.cc.o
+
+source/window.i: source/window.cc.i
+
+.PHONY : source/window.i
+
+# target to preprocess a source file
+source/window.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/window.cc.i
+.PHONY : source/window.cc.i
+
+source/window.s: source/window.cc.s
+
+.PHONY : source/window.s
+
+# target to generate assembly for a file
+source/window.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omega.dir/build.make CMakeFiles/omega.dir/source/window.cc.s
+.PHONY : source/window.cc.s
 
 # Help Target
 help:
@@ -606,9 +714,21 @@ help:
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
 	@echo "... omega"
-	@echo "... omega.o"
-	@echo "... omega.i"
-	@echo "... omega.s"
+	@echo "... source/button.o"
+	@echo "... source/button.i"
+	@echo "... source/button.s"
+	@echo "... source/panel.o"
+	@echo "... source/panel.i"
+	@echo "... source/panel.s"
+	@echo "... source/state.o"
+	@echo "... source/state.i"
+	@echo "... source/state.s"
+	@echo "... source/text.o"
+	@echo "... source/text.i"
+	@echo "... source/text.s"
+	@echo "... source/window.o"
+	@echo "... source/window.i"
+	@echo "... source/window.s"
 .PHONY : help
 
 

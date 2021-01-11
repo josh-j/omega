@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/omega.dir/omega.cpp.o"
-  "libomega.a"
+  "CMakeFiles/omega.dir/source/button.cc.o"
+  "CMakeFiles/omega.dir/source/panel.cc.o"
+  "CMakeFiles/omega.dir/source/state.cc.o"
+  "CMakeFiles/omega.dir/source/text.cc.o"
+  "CMakeFiles/omega.dir/source/window.cc.o"
+  "libomega.dylib"
   "libomega.pdb"
 )
 

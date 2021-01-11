@@ -1,2 +1,1 @@
-/usr/bin/ar qc libomega.a CMakeFiles/omega.dir/omega.cpp.o
-/usr/bin/ranlib libomega.a
+/usr/bin/clang++ -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -dynamiclib -Wl,-headerpad_max_install_names -o libomega.dylib -install_name @rpath/libomega.dylib CMakeFiles/omega.dir/source/button.cc.o CMakeFiles/omega.dir/source/panel.cc.o CMakeFiles/omega.dir/source/state.cc.o CMakeFiles/omega.dir/source/text.cc.o CMakeFiles/omega.dir/source/window.cc.o 

@@ -16,6 +16,11 @@
              // internally so the standard one wrapper is named differently
              // (it's used by e.g. stb_truetype)
 #define ImCeil(X) ceilf(X)
+
+#define FLOOR(_VAL) \
+  ((float)(int)(_VAL))  // ImFloor() is not inlined in MSVC debug builds
+#define ROUND(_VAL) ((float)(int)((_VAL) + 0.5f))  //
+
 static inline float Pow(float x, float y) {
   return powf(x, y);
 }  // DragBehaviorT/SliderBehaviorT uses Pow with either float/double and need
@@ -72,6 +77,36 @@ static inline T SubClampOverflow(T a, T b, T mn, T mx) {
   if (b < 0 && (a > mx + b)) return mx;
   return a - b;
 }
+
+struct Vec2 {
+  float x, y;
+  Vec2() { x = y = 0.0f; }
+  Vec2(float _x, float _y) {
+    x = _x;
+    y = _y;
+  }
+  float operator[](size_t idx) const {
+    assert(idx <= 1);
+    return (&x)[idx];
+  }  // We very rarely use this [] operator, the assert overhead is fine.
+  float& operator[](size_t idx) {
+    assert(idx <= 1);
+    return (&x)[idx];
+  }  // We very rarely use this [] operator, the assert overhead is fine.
+};
+
+// 4D vector (often used to store floating-point colors)
+struct Vec4 {
+  float x, y, z, w;
+  Vec4() { x = y = z = w = 0.0f; }
+  Vec4(float _x, float _y, float _z, float _w) {
+    x = _x;
+    y = _y;
+    z = _z;
+    w = _w;
+  }
+};
+
 // - Misc maths helpers
 static inline Vec2 Min(const Vec2& lhs, const Vec2& rhs) {
   return Vec2(lhs.x < rhs.x ? lhs.x : rhs.x, lhs.y < rhs.y ? lhs.y : rhs.y);
@@ -130,35 +165,6 @@ static inline float ImLinearSweep(float current, float target, float speed) {
 static inline Vec2 ImMul(const Vec2& lhs, const Vec2& rhs) {
   return Vec2(lhs.x * rhs.x, lhs.y * rhs.y);
 }
-
-struct Vec2 {
-  float x, y;
-  Vec2() { x = y = 0.0f; }
-  Vec2(float _x, float _y) {
-    x = _x;
-    y = _y;
-  }
-  float operator[](size_t idx) const {
-    assert(idx <= 1);
-    return (&x)[idx];
-  }  // We very rarely use this [] operator, the assert overhead is fine.
-  float& operator[](size_t idx) {
-    assert(idx <= 1);
-    return (&x)[idx];
-  }  // We very rarely use this [] operator, the assert overhead is fine.
-};
-
-// 4D vector (often used to store floating-point colors)
-struct Vec4 {
-  float x, y, z, w;
-  Vec4() { x = y = z = w = 0.0f; }
-  Vec4(float _x, float _y, float _z, float _w) {
-    x = _x;
-    y = _y;
-    z = _z;
-    w = _w;
-  }
-};
 
 struct Rect {
   Vec2 Min;  // Upper-left
@@ -229,8 +235,8 @@ struct Rect {
     Max.y += dy;
   }
   void ClipWith(const Rect& r) {
-    Min = Max(Min, r.Min);
-    Max = Min(Max, r.Max);
+    this->Min = ::Max(this->Min, r.Min);
+    this->Max = ::Min(this->Max, r.Max);
   }  // Simple version, may lead to an inverted rectangle, which is fine for
      // Contains/Overlaps test but not for display.
   void ClipWithFull(const Rect& r) {

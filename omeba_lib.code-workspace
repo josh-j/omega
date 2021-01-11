@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "clang-format.fallbackStyle": "Google",
+    "clang-format.style": "Google"
+  }
+}

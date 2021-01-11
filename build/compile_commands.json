@@ -1,7 +1,27 @@
 [
 {
   "directory": "/Users/joshj/Projects/omega/build",
-  "command": "/usr/bin/clang++   -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -o CMakeFiles/omega.dir/omega.cpp.o -c /Users/joshj/Projects/omega/omega.cpp",
-  "file": "/Users/joshj/Projects/omega/omega.cpp"
+  "command": "/usr/bin/clang++ -Domega_EXPORTS -I/Users/joshj/Projects/omega -I/Users/joshj/Projects/omega/, -I/Users/joshj/Projects/omega/include -I/Users/joshj/Projects/omega/source -I/Users/joshj/Projects/omega/include/prelude -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -fPIC -std=gnu++17 -o CMakeFiles/omega.dir/source/button.cc.o -c /Users/joshj/Projects/omega/source/button.cc",
+  "file": "/Users/joshj/Projects/omega/source/button.cc"
+},
+{
+  "directory": "/Users/joshj/Projects/omega/build",
+  "command": "/usr/bin/clang++ -Domega_EXPORTS -I/Users/joshj/Projects/omega -I/Users/joshj/Projects/omega/, -I/Users/joshj/Projects/omega/include -I/Users/joshj/Projects/omega/source -I/Users/joshj/Projects/omega/include/prelude -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -fPIC -std=gnu++17 -o CMakeFiles/omega.dir/source/panel.cc.o -c /Users/joshj/Projects/omega/source/panel.cc",
+  "file": "/Users/joshj/Projects/omega/source/panel.cc"
+},
+{
+  "directory": "/Users/joshj/Projects/omega/build",
+  "command": "/usr/bin/clang++ -Domega_EXPORTS -I/Users/joshj/Projects/omega -I/Users/joshj/Projects/omega/, -I/Users/joshj/Projects/omega/include -I/Users/joshj/Projects/omega/source -I/Users/joshj/Projects/omega/include/prelude -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -fPIC -std=gnu++17 -o CMakeFiles/omega.dir/source/state.cc.o -c /Users/joshj/Projects/omega/source/state.cc",
+  "file": "/Users/joshj/Projects/omega/source/state.cc"
+},
+{
+  "directory": "/Users/joshj/Projects/omega/build",
+  "command": "/usr/bin/clang++ -Domega_EXPORTS -I/Users/joshj/Projects/omega -I/Users/joshj/Projects/omega/, -I/Users/joshj/Projects/omega/include -I/Users/joshj/Projects/omega/source -I/Users/joshj/Projects/omega/include/prelude -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -fPIC -std=gnu++17 -o CMakeFiles/omega.dir/source/text.cc.o -c /Users/joshj/Projects/omega/source/text.cc",
+  "file": "/Users/joshj/Projects/omega/source/text.cc"
+},
+{
+  "directory": "/Users/joshj/Projects/omega/build",
+  "command": "/usr/bin/clang++ -Domega_EXPORTS -I/Users/joshj/Projects/omega -I/Users/joshj/Projects/omega/, -I/Users/joshj/Projects/omega/include -I/Users/joshj/Projects/omega/source -I/Users/joshj/Projects/omega/include/prelude -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -fPIC -std=gnu++17 -o CMakeFiles/omega.dir/source/window.cc.o -c /Users/joshj/Projects/omega/source/window.cc",
+  "file": "/Users/joshj/Projects/omega/source/window.cc"
 }
 ]
