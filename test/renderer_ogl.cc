@@ -1,3 +1,4 @@
+#define GL_SILENCE_DEPRECATION
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 //#include <gl\GLAux.h>
@@ -11,34 +12,63 @@ namespace omega_test {
 omega::hfont RendererOGL::BuildFont(const char* const name, unsigned height,
                                     unsigned weight, unsigned flags,
                                     omega::FontLetterWidths* letter_widths) {
-  // ifdef WINDOWS
-  HDC hdc = wglGetCurrentDC();
-  omega::hfont glFont = glGenLists(256);
-  HFONT font =
-      ::CreateFontA(-MulDiv(height, GetDeviceCaps(hdc, LOGPIXELSY), 72), 0, 0,
-                    0, weight, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-                    CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, name);
+  /*# if defined(__APPLE__) || defined(MACOSX)
+    CGLContextObj curCGLContext = CGLGetCurrentContext();
+    CGLShareGroupObj curCGLShareGroup = CGLGetShareGroup(curCGLContext);
 
-  HFONT oldFont = (HFONT)SelectObject(hdc, font);
+    cl_context_properties properties[] = {
+        CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
+        (cl_context_properties)curCGLShareGroup, 0};
+  #elif defined WIN32
+    cl_context_properties properties[] = {
+        CL_GL_CONTEXT_KHR,
+        (cl_context_properties)wglGetCurrentContext(),
+        CL_WGL_HDC_KHR,
+        (cl_context_properties)wglGetCurrentDC(),
+        CL_CONTEXT_PLATFORM,
+        (cl_context_properties)(platforms[0])(),
+        0};
+  #else
+    cl_context_properties properties[] = {
+        CL_GL_CONTEXT_KHR,
+        (cl_context_properties)glXGetCurrentContext(),
+        CL_GLX_DISPLAY_KHR,
+        (cl_context_properties)glXGetCurrentDisplay(),
+        CL_CONTEXT_PLATFORM,
+        (cl_context_properties)(platforms[0])(),
+        0};
+  #endif
 
-  wglUseFontBitmapsA(hdc, 0, 256, glFont);
+    HDC hdc = wglGetCurrentDC();
+    omega::hfont glFont = glGenLists(256);
+    HFONT font =
+        ::CreateFontA(-MulDiv(height, GetDeviceCaps(hdc, LOGPIXELSY), 72), 0, 0,
+                      0, weight, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+                      CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH,
+  name);
 
-  if (letter_widths) {
-    SIZE s = {0, 0};
-    char letter[2] = {0, 0};
+    HFONT oldFont = (HFONT)SelectObject(hdc, font);
 
-    for (unsigned i = 0; i < 255; ++i) {
-      letter[0] = i;
-      GetTextExtentPoint32A(hdc, letter, 1, &s);
-      /*(*letter_widths)[i] = s.cx;*/
-      letter_widths->push_back(s.cx);
-    }
-  }
+    wglUseFontBitmapsA(hdc, 0, 256, glFont);
 
-  SelectObject(hdc, oldFont);
-  DeleteObject(font);
+    if (letter_widths) {
+      SIZE s = {0, 0};
+      char letter[2] = {0, 0};
 
-  return glFont;
+      for (unsigned i = 0; i < 255; ++i) {
+        letter[0] = i;
+        GetTextExtentPoint32A(hdc, letter, 1, &s);
+        //(*letter_widths)[i] = s.cx;
+  letter_widths->push_back(s.cx);
+}
+}
+
+SelectObject(hdc, oldFont);
+DeleteObject(font);
+
+return glFont;
+*/
+  return 0;
 }
 
 void RendererOGL::DestroyFont(omega::hfont font) { glDeleteLists(font, 256); }

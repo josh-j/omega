@@ -1,3 +1,9 @@
 #include "window.h"
 
-namespace Window {}
+namespace Window {
+
+void Begin() {}
+
+void End() {}
+
+}  // namespace Windo

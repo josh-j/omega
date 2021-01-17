@@ -18,5 +18,5 @@ void BeginChild() {}
 
 void EndChild() {}
 
-}  // namespace Panel
-}  // namespace omega
+} // namespace Panel
+} // namespace omega

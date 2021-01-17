@@ -77,4 +77,17 @@ void Draw() {
       */
 }
 
-int main() {}
+int main() {
+  /*
+  Window::start();
+  Window::SetRect(300, 300, 300, 300);
+  Window::SetTitle("Hello!");
+  Window::SetMovable(true);
+  Window::SetKeyable(true);
+    Button::start();
+      Text::start("asdf");
+      Text::end();
+    Button::end();
+  Window::end();
+  */
+}

@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/joshj/Projects/omega/test/omega_test -I/Users/joshj/Projects/omega/test/PUBLIC -I/Users/joshj/Projects/omega/test/. -I/Users/joshj/Projects/omega/test/../include/prelude
+CXX_INCLUDES = -I/Users/joshj/Projects/omega/include -I/Users/joshj/Projects/omega/build
 
 CXX_FLAGSx86_64 =  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=gnu++17
 

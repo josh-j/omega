@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "common.h"
+#include "rect.h"
 #include "renderer.h"
 
 namespace omega {
@@ -11,7 +12,8 @@ struct State {
   std::string line{""};
   std::vector<std::string> many_lines{};
   Rect rect;
-  // Renderer* renderer{nullptr};
+  bool is_child;
+  Renderer* renderer{nullptr};
 };
 
 extern State s;

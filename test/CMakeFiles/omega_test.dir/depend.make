@@ -4,6 +4,8 @@
 CMakeFiles/omega_test.dir/main.cc.o: main.cc
 
 CMakeFiles/omega_test.dir/renderer_ogl.cc.o: /Users/joshj/Projects/omega/include/prelude/color.h
+CMakeFiles/omega_test.dir/renderer_ogl.cc.o: /Users/joshj/Projects/omega/include/prelude/common.h
+CMakeFiles/omega_test.dir/renderer_ogl.cc.o: /Users/joshj/Projects/omega/include/prelude/typedefs.h
 CMakeFiles/omega_test.dir/renderer_ogl.cc.o: /Users/joshj/Projects/omega/include/renderer.h
 CMakeFiles/omega_test.dir/renderer_ogl.cc.o: renderer_ogl.cc
 CMakeFiles/omega_test.dir/renderer_ogl.cc.o: renderer_ogl.h
