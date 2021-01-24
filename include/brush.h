@@ -4,6 +4,7 @@
 #include "forward_declarations.h"
 
 namespace omega {
+namespace Brush {
 enum CursorType {
   kCursorNone,
   kCursorArrow,
@@ -57,4 +58,5 @@ void PanelFrame(const Point& pos, const Size& size, const Color& color_border,
 
 void Image(const Point& point, const std::string& name);
 void Cursor(const Point& point, CursorType cursor);
+} // namespace Brush
 }  // namespace omega

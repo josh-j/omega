@@ -1,93 +1,75 @@
+#define GL_SILENCE_DEPRECATION
 #include <iostream>
+#include <stdio.h>
+#include "state.h"
+#include "renderer_ogl.h"
 
-// composable gui - completely generic - composable objects? - templates?
+#include <GLUT/glut.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
 
-/*
+// This is just an example using basic glut functionality.
+// If you want specific Apple functionality, look up AGL
 
-compose::onFocus(T::function) {
-    if (mouseOver(g.mousePos, g.areaAt(T)))
-        T::function();
+void init() // Called before main loop to set up the program
+{
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glEnable(GL_DEPTH_TEST);
+    glShadeModel(GL_SMOOTH);
+}
+
+// Called at the start of the program, after a glutPostRedisplay() and during idle
+// to display a frame
+void display()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+
+    glBegin(GL_TRIANGLES);
+        glVertex3f(0.0, 0.0, -10.0);
+        glVertex3f(1.0, 0.0, -10.0);
+        glVertex3f(0.0, 1.0, -10.0);
+    glEnd();
+
+    glutSwapBuffers();
+}
+
+// Called every time a window is resized to resize the projection matrix
+void reshape(int w, int h)
+{
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glFrustum(-0.1, 0.1, -float(h)/(10.0*float(w)), float(h)/(10.0*float(w)), 0.5, 1000.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 }
 
 
-what does our state look like?
+int main(int argc, char **argv)
+{
+    glutInit(&argc, argv); // Initializes glut
 
-Vector <Window> Windows;
-Console <Parent>
-OutputView
-InputView
-SendButton
-Menu <Parent>
+    // Sets up a double buffer with RGBA components and a depth component
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
 
-Vector <Window> Windows;
-Console - Outputview
-        - Inputview
-        - SendButton    - Label
-                        - Clicker
-Menu
+    // Sets the window size to 512*512 square pixels
+    glutInitWindowSize(512, 512);
 
----- With a declarative style can we remove state?
+    // Sets the window position to the upper left
+    glutInitWindowPosition(0, 0);
 
---- What about a computation-based style?
+    // Creates a window using internal glut functionality
+    glutCreateWindow("Hello!");
 
-*/
+    // passes reshape and display functions to the OpenGL machine for callback
+    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);
+    glutIdleFunc(display);
 
-void Draw() {
-  /*
-      What does building a console look like?
-      Input is being collected at event time and being pushed to gui at draw
-     time State is being stored globally?
+    init();
 
-      int count = 0;
-
-      Panel::begin();
-          Window::begin();
-          Window::setTitle("Console"); // why am i setting the title every
-     frame? Panel::beginChild(); VStack::Begin(); Panel::beginChild();
-                      Text::begin();
-                          Text::label("count", count)
-                      Text::end();
-                      auto ParentPos = Window::pos();
-                      Button::begin();
-                          //Button::move(Button::parent()::pos() + Pos(10,10));
-                          Button::label("Increment");
-                          Button::onClick(InputView::pressEnter);
-                          Button::onclick(++count);
-                      Button::end();
-                  Panel::endChild();
-              VStack::End();
-
-              OutputView::begin();
-                  //static std::vector<string> consoleLines; // one option for
-     maintaining state
-
-                  auto threeLinesAgo = OutputView::getLine(-3);
-                  OutputView::pushLine(threeLinesAgo);
-                  // high light text
-                  compose::onFocus() >> OutputView::mouseSelect() >>
-     compose::onMouseRelease() >> compose::pushClipboard(); OutputView::end();
-
-              InputView::begin();
-                  // compose
-                  compose::onFocus(InputView::listenForKeyPress());
-                  InputView::onEnter(OutputView::pushLine);
-              InputView::end();
-          Panel::endChild();
-      Panel::end();
-      */
-}
-
-int main() {
-  /*
-  Window::start();
-  Window::SetRect(300, 300, 300, 300);
-  Window::SetTitle("Hello!");
-  Window::SetMovable(true);
-  Window::SetKeyable(true);
-    Button::start();
-      Text::start("asdf");
-      Text::end();
-    Button::end();
-  Window::end();
-  */
+    // Starts the program.
+    glutMainLoop();
+    return 0;
 }

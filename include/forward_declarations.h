@@ -13,7 +13,6 @@ class Window;
 
 // General
 // class Color;
-class Brush;
 class Font;
 class FontManager;
 class InputHandler;

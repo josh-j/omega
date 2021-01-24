@@ -58,10 +58,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.19.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.19.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.19.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.19.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -78,7 +78,7 @@ CMAKE_BINARY_DIR = /Users/joshj/Projects/omega/test
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.19.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.19.3/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -89,7 +89,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/local/Cellar/cmake/3.19.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/joshj/Projects/omega/test/CPackSourceConfig.cmake
+	/usr/local/Cellar/cmake/3.19.3/bin/cpack --config ./CPackSourceConfig.cmake /Users/joshj/Projects/omega/test/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -100,7 +100,7 @@ package_source/fast: package_source
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.19.2/bin/ctest --force-new-ctest-process $(ARGS)
+	/usr/local/Cellar/cmake/3.19.3/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -111,7 +111,7 @@ test/fast: test
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	/usr/local/Cellar/cmake/3.19.2/bin/cpack --config ./CPackConfig.cmake
+	/usr/local/Cellar/cmake/3.19.3/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package

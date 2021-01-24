@@ -11,7 +11,7 @@ file(GLOB SOURCES "*.cc")
 
 link_directories("~/Projects/omega/build")
 add_executable(omega_test ${SOURCES})
-target_link_libraries(omega_test omega "-framework OpenGL") 
+target_link_libraries(omega_test omega "-framework OpenGL -framework GLUT")
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

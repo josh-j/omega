@@ -53,10 +53,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.19.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.19.3/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.19.2/bin/cmake -E rm -f
+RM = /usr/local/Cellar/cmake/3.19.3/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /Users/joshj/Projects/omega/test
 include CMakeFiles/Experimental.dir/progress.make
 
 CMakeFiles/Experimental:
-	/usr/local/Cellar/cmake/3.19.2/bin/ctest -D Experimental
+	/usr/local/Cellar/cmake/3.19.3/bin/ctest -D Experimental
 
 Experimental: CMakeFiles/Experimental
 Experimental: CMakeFiles/Experimental.dir/build.make

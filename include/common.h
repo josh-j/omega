@@ -16,6 +16,7 @@
 #include "prelude/log.h"
 #include "prelude/singleton.h"
 #include "prelude/typedefs.h"
+#include "prelude/safe_assert.h"
 
 // #define HERMES_CONFIG_TYPE Config_MapObjVecArray
 // #define HERMES_STRING_TYPE std::string

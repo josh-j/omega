@@ -18,7 +18,7 @@ void Rectangle(const Point& pos, const Size& size, const Color& color) {
   s.renderer->RenderQuad(pos.x, pos.y, size.w, size.h);
 }
 
-void RoundedRect(const Point& pos, const Size& size, const Color& color,
+void RoundedRect(const Point &pos, const Size &size, const Color &color,
                  float radius) {
   SAFE_ASSERT(s.renderer != nullptr);
   float x = pos.x;

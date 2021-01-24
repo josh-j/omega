@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/local/Cellar/cmake/3.19.2/bin/cmake" "/Users/joshj/Projects/omega/test"
+ConfigureCommand: "/usr/local/Cellar/cmake/3.19.3/bin/cmake" "/Users/joshj/Projects/omega/test"
 MakeCommand: /usr/local/Cellar/cmake/3.19.2/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
