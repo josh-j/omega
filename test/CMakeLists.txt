@@ -1,27 +1,41 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(omega_test VERSION 0.1.0)
+# cmake_minimum_required(VERSION 3.0.0)
+# project(omega_test VERSION 0.1.0)
 
-include(CTest)
-enable_testing()
+# set(CMAKE_CXX_STANDARD 17)
+# #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated-declarations")
 
-set(CMAKE_CXX_STANDARD 17)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated-declarations")
-
-file(GLOB SOURCES "*.cc")
-
-link_directories("~/Projects/omega/build")
-add_executable(omega_test ${SOURCES})
-target_link_libraries(omega_test omega "-framework OpenGL -framework GLUT")
+# file(GLOB SOURCES "*.cc")
 
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+# if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#     set(MACOSX TRUE)
+# endif()
 
-#include_directories(omega_teset PUBLIC "~/Projects/omega/include/")
-target_include_directories(omega_test PUBLIC "~/Projects/omega/include/" "~/Projects/omega/build")
-#target_include_directories(omega_test PUBLIC
-#                          "../${PROJECT_SOURCE_DIR}/include",
-#                          "../${PROJECT_SOURCE_DIR}/include/prelude"
-#                          )
+# link_directories("~/Projects/omega/build")
+# add_executable(omega_test ${SOURCES})
 
+# if (MACOSX)
+#    target_link_libraries(omega_test omega_lib "-framework OpenGL -framework GLUT")
+# else()
+#    target_link_libraries(omega_test omega_lib -lGL -lGLU -lglut)
+# endif()
+# #include_directories(omega_teset PUBLIC "~/Projects/omega/include/")
+# target_include_directories(omega_test PUBLIC "~/Projects/omega/include/" "~/Projects/omega/build")
+# #target_include_directories(omega_test PUBLIC
+# #                          "../${PROJECT_SOURCE_DIR}/include",
+# #                          "../${PROJECT_SOURCE_DIR}/include/prelude"
+# #                          )
+
+add_executable(omega_test main.cc renderer_ogl.cc)
+target_compile_features(omega_test PUBLIC cxx_std_17)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(MACOSX TRUE)
+endif()
+
+
+if (MACOSX)
+   target_link_libraries(omega_test PUBLIC omega_lib "-framework OpenGL -framework GLUT")
+else()
+   target_link_libraries(omega_test PUBLIC omega_lib -lGL -lGLU -lglut)
+endif()

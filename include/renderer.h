@@ -76,7 +76,7 @@ class Renderer {
                                   float radius, float line_width);           \
     virtual void RenderImage(float abs_x, float abs_y, float abs_w,          \
                              float abs_h, unsigned flags,                    \
-                             const byte* const image);                       \
+                             const std::byte* const image);                       \
     virtual void StartRendering();                                           \
     virtual void EndRendering();
 

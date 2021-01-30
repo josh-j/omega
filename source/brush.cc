@@ -1,5 +1,5 @@
 #include "brush.h"
-
+#include <cmath>
 #include "state.h"
 
 namespace omega {

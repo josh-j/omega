@@ -1,75 +1,105 @@
 #define GL_SILENCE_DEPRECATION
-#include <iostream>
 #include <stdio.h>
-#include "state.h"
-#include "renderer_ogl.h"
 
+#include <iostream>
+
+#include "brush.h"
+#include "renderer_ogl.h"
+#include "state.h"
+#include "window.h"
+
+#ifdef __APPLE__
 #include <GLUT/glut.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+
+#endif
+
+omega_test::RendererOGL renderer;
 
 // This is just an example using basic glut functionality.
 // If you want specific Apple functionality, look up AGL
 
-void init() // Called before main loop to set up the program
+void init()  // Called before main loop to set up the program
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glEnable(GL_DEPTH_TEST);
-    glShadeModel(GL_SMOOTH);
+  // glClearColor(0.0, 0.0, 0.0, 0.0);
+  // glEnable(GL_DEPTH_TEST);
+  // glShadeModel(GL_SMOOTH);
+
+  glShadeModel(GL_SMOOTH);
+  glClearColor(0.2117647058823529f, 0.203921568627451f, 0.2549019607843137f,
+               0.5f);
+  glClearDepth(1.0f);
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LEQUAL);
+  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+  omega::s.renderer = &renderer;
+  lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
+  lgr::emit() << "Init";
 }
 
-// Called at the start of the program, after a glutPostRedisplay() and during idle
-// to display a frame
-void display()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
+// Called at the start of the program, after a glutPostRedisplay() and during
+// idle to display a frame
+void display() {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glLoadIdentity();
 
-    glBegin(GL_TRIANGLES);
-        glVertex3f(0.0, 0.0, -10.0);
-        glVertex3f(1.0, 0.0, -10.0);
-        glVertex3f(0.0, 1.0, -10.0);
-    glEnd();
+  using namespace omega;
+  Window::SetShape(50,50,150,150,Color(192,128,128,192)); // this isn't always going to be here
+  Window::Draw();
+    {
+      Window::SetShape(50,50,75,75,Color(192,128,128,192)); // needs to be relative to prev
+      Window::Draw();
+    }
 
-    glutSwapBuffers();
+  glutSwapBuffers();
 }
 
+  
 // Called every time a window is resized to resize the projection matrix
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glFrustum(-0.1, 0.1, -float(h)/(10.0*float(w)), float(h)/(10.0*float(w)), 0.5, 1000.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+void reshape(int w, int h) {
+  // glViewport(0, 0, w, h);
+  // glMatrixMode(GL_PROJECTION);
+  // glLoadIdentity();
+  // glFrustum(-0.1, 0.1, -float(h)/(10.0*float(w)), float(h)/(10.0*float(w)),
+  // 0.5, 1000.0); glMatrixMode(GL_MODELVIEW); glLoadIdentity();
+
+  glViewport(0, 0, w, h);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(0.0f, w, h, 0.0f, -1.0f, 1.0f);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 }
 
+int main(int argc, char **argv) {
+  glutInit(&argc, argv);  // Initializes glut
 
-int main(int argc, char **argv)
-{
-    glutInit(&argc, argv); // Initializes glut
+  // Sets up a double buffer with RGBA components and a depth component
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
 
-    // Sets up a double buffer with RGBA components and a depth component
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
+  // Sets the window size to 512*512 square pixels
+  glutInitWindowSize(1024, 768);
 
-    // Sets the window size to 512*512 square pixels
-    glutInitWindowSize(512, 512);
+  // Sets the window position to the upper left
+  glutInitWindowPosition(0, 0);
 
-    // Sets the window position to the upper left
-    glutInitWindowPosition(0, 0);
+  // Creates a window using internal glut functionality
+  glutCreateWindow("Hello!");
 
-    // Creates a window using internal glut functionality
-    glutCreateWindow("Hello!");
+  // passes reshape and display functions to the OpenGL machine for callback
+  glutReshapeFunc(reshape);
+  glutDisplayFunc(display);
+  glutIdleFunc(display);
 
-    // passes reshape and display functions to the OpenGL machine for callback
-    glutReshapeFunc(reshape);
-    glutDisplayFunc(display);
-    glutIdleFunc(display);
+  init();
 
-    init();
-
-    // Starts the program.
-    glutMainLoop();
-    return 0;
+  // Starts the program.
+  glutMainLoop();
+  return 0;
 }

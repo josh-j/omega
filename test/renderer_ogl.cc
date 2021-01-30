@@ -1,7 +1,16 @@
 #define GL_SILENCE_DEPRECATION
+#ifdef __APPLE__
+#include <GLUT/glut.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
-//#include <gl\GLAux.h>
+#else
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+
+#include <cmath>
+
 #include "prelude/common.h"
 #include "renderer_ogl.h"
 
@@ -263,7 +272,7 @@ void RendererOGL::RenderCircleLine(float center_x, float center_y, float radius,
 }
 
 void RendererOGL::RenderImage(float x, float y, float w, float h,
-                              unsigned flags, const byte* const image) {
+                              unsigned flags, const std::byte* const image) {
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glDisable(GL_TEXTURE_2D);
