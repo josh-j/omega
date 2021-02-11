@@ -3,10 +3,7 @@
 
 #include <iostream>
 
-#include "brush.h"
-#include "renderer_ogl.h"
-#include "state.h"
-#include "window.h"
+#include "client.h"
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -19,7 +16,6 @@
 
 #endif
 
-omega_test::RendererOGL renderer;
 
 // This is just an example using basic glut functionality.
 // If you want specific Apple functionality, look up AGL
@@ -38,9 +34,8 @@ void init()  // Called before main loop to set up the program
   glDepthFunc(GL_LEQUAL);
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-  omega::s.renderer = &renderer;
-  lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
-  lgr::emit() << "Init";
+  CL_Initialize();
+
 }
 
 // Called at the start of the program, after a glutPostRedisplay() and during
@@ -49,13 +44,8 @@ void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 
-  using namespace omega;
-  Window::SetShape(50,50,150,150,Color(192,128,128,192)); // this isn't always going to be here
-  Window::Draw();
-    {
-      Window::SetShape(50,50,75,75,Color(192,128,128,192)); // needs to be relative to prev
-      Window::Draw();
-    }
+  CL_Draw();
+
 
   glutSwapBuffers();
 }
@@ -101,5 +91,7 @@ int main(int argc, char **argv) {
 
   // Starts the program.
   glutMainLoop();
+
+  CL_Shutdown();
   return 0;
 }

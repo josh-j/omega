@@ -26,7 +26,7 @@
 # #                          "../${PROJECT_SOURCE_DIR}/include/prelude"
 # #                          )
 
-add_executable(omega_test main.cc renderer_ogl.cc)
+add_executable(omega_test main.cc renderer_ogl.cc client.cc renderer_ogl.h client.h)
 target_compile_features(omega_test PUBLIC cxx_std_17)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")

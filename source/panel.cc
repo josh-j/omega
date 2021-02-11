@@ -18,5 +18,56 @@ void BeginChild() {}
 
 void EndChild() {}
 
+
+void Draw() {
+  Brush::Rectangle(s.rect.pos(), s.rect.size(), s.color);
+}
+
+void SetShape(float x, float y, float w, float h, const Color &color) {
+  s.rect.set(x, y, w, h);
+  s.color = color;
+}
+
+void MoveTo(float x, float y) {
+
+}
+
+void MoveAdjust(float x, float y) {
+
+}
+
+void Resize(float w, float h) {
+
+}
+
+void SetMinMaxSize(float w_min, float h_min, float w_max, float h_max) {
+
+}
+
+void OnMouseMove() {
+
+}
+
+void OnMousePress() {
+
+}
+
+void OnMouseRelease() {
+
+}
+
+void OnMouseSingleClick() {
+
+}
+
+void OnMouseDoubleClick() {
+
+}
+
+void OnMouseWheel() {
+
+}
+
+
 } // namespace Panel
 } // namespace omega
