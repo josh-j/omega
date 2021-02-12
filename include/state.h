@@ -16,6 +16,8 @@ struct State {
   Rect rect;
   Color color;
   bool is_child;
+  bool is_pressed;
+  bool is_moving;
   Renderer* renderer{nullptr};
 };
 

@@ -1,4 +1,5 @@
-
+#include <iostream>
+#include <vector>
 
 #include "client.h"
 #include "brush.h"
@@ -18,6 +19,7 @@ void CL_Initialize() {
   omega::s.renderer = &renderer;
   lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
   lgr::emit() << "Init";
+
 }
 
 void CL_Draw() {
