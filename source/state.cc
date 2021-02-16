@@ -2,4 +2,5 @@
 
 namespace omega {
 State s;
+DeclarativeManager dm;
 }

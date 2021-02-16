@@ -67,6 +67,22 @@ void reshape(int w, int h) {
   glLoadIdentity();
 }
 
+void MouseButton(int button, int state, int x, int y) {
+  // if (button == GLUT_LEFT_BUTTON) {
+  //   }
+  CL_MouseButton(button, state, x, y);
+  CL_MouseMove(x, y);
+}
+
+void MouseMotion(int x, int y) {
+  CL_MouseMove(x, y);
+}
+
+void Keyboard(unsigned char key, int x, int y) {
+  CL_Keyboard(key, x, y);
+  CL_MouseMove(x, y);
+}
+
 int main(int argc, char **argv) {
   glutInit(&argc, argv);  // Initializes glut
 
@@ -86,7 +102,10 @@ int main(int argc, char **argv) {
   glutReshapeFunc(reshape);
   glutDisplayFunc(display);
   glutIdleFunc(display);
-
+  glutKeyboardFunc (Keyboard);
+  glutMouseFunc (MouseButton);
+  glutPassiveMotionFunc(MouseMotion);
+  glutMotionFunc (MouseMotion);
   init();
 
   // Starts the program.

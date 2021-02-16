@@ -2,9 +2,8 @@
 
 #include "text.h"
 
-namespace omega {
-namespace Button {
+namespace omega::Button {
 
 void SetLabel(std::string label) { Text::Set(label); }
-}  // namespace Button
-}  // namespace omega
+
+}  // namespace omega::Button

@@ -2,5 +2,7 @@
 
 void CL_Initialize();
 void CL_Draw();
-//bool CL_ProcessInput(UINT uMsg, WPARAM wParam, LPARAM lParam);
+void CL_MouseButton(int button, int state, int x, int y);
+void CL_MouseMove(int x, int y);
+void CL_Keyboard(unsigned char key, int x, int y);
 void CL_Shutdown();
