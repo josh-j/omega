@@ -1,52 +1,57 @@
 [
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/brush.cc.o -c /Users/joshj/Projects/omega/source/brush.cc",
-  "file": "/Users/joshj/Projects/omega/source/brush.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/brush.cc.o -c /home/sio/Projects/omega/source/brush.cc",
+  "file": "/home/sio/Projects/omega/source/brush.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/button.cc.o -c /Users/joshj/Projects/omega/source/button.cc",
-  "file": "/Users/joshj/Projects/omega/source/button.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/button.cc.o -c /home/sio/Projects/omega/source/button.cc",
+  "file": "/home/sio/Projects/omega/source/button.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/panel.cc.o -c /Users/joshj/Projects/omega/source/panel.cc",
-  "file": "/Users/joshj/Projects/omega/source/panel.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/io.cc.o -c /home/sio/Projects/omega/source/io.cc",
+  "file": "/home/sio/Projects/omega/source/io.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/state.cc.o -c /Users/joshj/Projects/omega/source/state.cc",
-  "file": "/Users/joshj/Projects/omega/source/state.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/panel.cc.o -c /home/sio/Projects/omega/source/panel.cc",
+  "file": "/home/sio/Projects/omega/source/panel.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/text.cc.o -c /Users/joshj/Projects/omega/source/text.cc",
-  "file": "/Users/joshj/Projects/omega/source/text.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/state.cc.o -c /home/sio/Projects/omega/source/state.cc",
+  "file": "/home/sio/Projects/omega/source/state.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/theme.cc.o -c /Users/joshj/Projects/omega/source/theme.cc",
-  "file": "/Users/joshj/Projects/omega/source/theme.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/text.cc.o -c /home/sio/Projects/omega/source/text.cc",
+  "file": "/home/sio/Projects/omega/source/text.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/source",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_lib.dir/window.cc.o -c /Users/joshj/Projects/omega/source/window.cc",
-  "file": "/Users/joshj/Projects/omega/source/window.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/theme.cc.o -c /home/sio/Projects/omega/source/theme.cc",
+  "file": "/home/sio/Projects/omega/source/theme.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/test",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_test.dir/main.cc.o -c /Users/joshj/Projects/omega/test/main.cc",
-  "file": "/Users/joshj/Projects/omega/test/main.cc"
+  "directory": "/home/sio/Projects/omega/build/source",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_lib.dir/window.cc.o -c /home/sio/Projects/omega/source/window.cc",
+  "file": "/home/sio/Projects/omega/source/window.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/test",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_test.dir/renderer_ogl.cc.o -c /Users/joshj/Projects/omega/test/renderer_ogl.cc",
-  "file": "/Users/joshj/Projects/omega/test/renderer_ogl.cc"
+  "directory": "/home/sio/Projects/omega/build/test",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_test.dir/main.cc.o -c /home/sio/Projects/omega/test/main.cc",
+  "file": "/home/sio/Projects/omega/test/main.cc"
 },
 {
-  "directory": "/Users/joshj/Projects/omega/build/test",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/joshj/Projects/omega/source/../include -I/Users/joshj/Projects/omega/source/../include/prelude  -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk -std=c++17 -o CMakeFiles/omega_test.dir/client.cc.o -c /Users/joshj/Projects/omega/test/client.cc",
-  "file": "/Users/joshj/Projects/omega/test/client.cc"
+  "directory": "/home/sio/Projects/omega/build/test",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_test.dir/renderer_ogl.cc.o -c /home/sio/Projects/omega/test/renderer_ogl.cc",
+  "file": "/home/sio/Projects/omega/test/renderer_ogl.cc"
+},
+{
+  "directory": "/home/sio/Projects/omega/build/test",
+  "command": "/usr/bin/c++  -I/home/sio/Projects/omega/source/../include -I/home/sio/Projects/omega/source/../include/prelude -std=c++17 -o CMakeFiles/omega_test.dir/client.cc.o -c /home/sio/Projects/omega/test/client.cc",
+  "file": "/home/sio/Projects/omega/test/client.cc"
 }
 ]

@@ -19,10 +19,10 @@ bool Contains(float xpos, float ypos) {
 // }
 
 Rect& Area(Rect& rect) {
-  s.rect = rect;
+  s.rect.set(rect);
   if (s.is_child) {
-    rect.x += s.abs_rect->x;
-    rect.y += s.abs_rect->y;
+    s.rect.x += s.abs_rect->x;
+    s.rect.y += s.abs_rect->y;
   }
   s.abs_rect = &rect;
   return *s.abs_rect;
