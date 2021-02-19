@@ -32,23 +32,37 @@ void CL_Initialize() {
   omega::s.renderer = &renderer;
   lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
   lgr::emit() << "Init";
-
+  renderer.BuildFont("/usr/share/fonts/droid/DroidSans.ttf", 14, 0, 0, 0);
 
   Panel::Declare::Begin();
   Panel::Declare::Color(192, 128, 128, 128);
-  Rect r;
-  r.set(50,50,150, 150);
-  Panel::Declare::Area(r);
+  Panel::Declare::Area(Rect(50, 50, 150, 150));
 
-  auto changeAlpha = []() {
-    if (IO::ind.mouse_pressed_ && Panel::Contains(IO::ind.mouse_position_.x, IO::ind.mouse_position_.y)) {
+  // needs to hold Pressed state
+  //
+  // auto changeEntered = []() {
+
+  // };
+
+  auto changePress = []() {
+    if (Panel::Contains(IO::ind.mouse_position_.x, IO::ind.mouse_position_.y)) {
+      s.panel_data[s.current_id].is_hovered_ = true;
+      if (IO::ind.mouse_pressed_) {
+        s.panel_data[s.current_id].is_held_ = true;
+      } else {
+        s.panel_data[s.current_id].is_held_ = false;
+      }
+    } else {
+      s.panel_data[s.current_id].is_hovered_ = false;
+    }
+
+    if (s.panel_data[s.current_id].is_held_) {
       s.abs_rect->x += IO::ind.mouse_move_delta_.x;
       s.abs_rect->y += IO::ind.mouse_move_delta_.y;
-      // s.color.a = 255;
     }
   };
 
-  IO::Declare::OnMouseMove(changeAlpha);
+  IO::Declare::OnMouseMove(changePress);
   Panel::Declare::Draw();
   {
     Panel::Declare::Begin();
@@ -78,9 +92,11 @@ void CL_Draw() {
   //   Window::Draw();
   // }
 
+  renderer.SetColor(255, 255, 255, 255);
+  renderer.RenderText(0, 300, 300, "Testing one two THREE!");
   omega::dm.execute();
   IO::EndFrame();
-
+  s.EndFrame();
   /*
   **
   ** OnPress could set a flag is_moving = true, could call a callback for a button, could say highlight this text
@@ -121,4 +137,6 @@ void CL_Keyboard(unsigned char key, int x, int y) {
   omega::IO::KeyPress(key);
 }
 
-void CL_Shutdown() {}
+void CL_Shutdown() {
+  renderer.DestroyFont(0);
+}

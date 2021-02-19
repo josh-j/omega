@@ -38,6 +38,7 @@ void Begin() {
     s.is_child = true;
   }
   ++s.level;
+  ++s.current_id;
 }
 
 void End() {

@@ -14,20 +14,7 @@ namespace Panel {
 ** and capable of holding "children."
 */
 
-enum PanelStates {
-  kStateNormal = 0,
-  kStateHovered,
-  kStateSelected,
-  kStateFocused,
-  kStateHeld,
-  kStateNum
-};
 
-enum HorizontalAlign { kHorzAlignLeft, kHorzAlignCenter, kHorzAlignRight };
-
-enum VerticleAlign { kVertAlignTop, kVertAlignMiddle, kVertAlignBottom };
-
-enum RequestType { kRequestNone, kRequestInit, kRequestLoadFont };
 
 bool Contains(float xpos, float ypos);
 // bool Contains(const Point &point);

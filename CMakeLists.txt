@@ -42,6 +42,14 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
   include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
+find_package(PkgConfig REQUIRED)
+# find_package(glfw3 REQUIRED)
+# TODO: move depedencies to test
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+find_package(Freetype REQUIRED)
+pkg_check_modules(Freetype REQUIRED freetype2)
+
 # Accumulator library
 # This is header only, so could be replaced with git submodules or FetchContent
 # find_package(Boost REQUIRED)

@@ -28,14 +28,14 @@
 
 add_executable(omega_test main.cc renderer_ogl.cc client.cc renderer_ogl.h client.h)
 target_compile_features(omega_test PUBLIC cxx_std_17)
-
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(MACOSX TRUE)
 endif()
 
+target_include_directories(omega_test PUBLIC ${FREETYPE_INCLUDE_DIRS})
 
-if (MACOSX)
-   target_link_libraries(omega_test PUBLIC omega_lib "-framework OpenGL -framework GLUT")
-else()
-   target_link_libraries(omega_test PUBLIC omega_lib -lGL -lGLU -lglut)
-endif()
+#if (MACOSX) # TODO: find better way
+#   target_link_libraries(omega_test PUBLIC omega_lib "-framework OpenGL -framework GLUT")
+#else()
+   target_link_libraries(omega_test PUBLIC omega_lib ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${FREETYPE_LIBRARIES})
+#endif()
