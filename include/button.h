@@ -1,9 +1,17 @@
 #pragma once
 
 #include <string>
+#include "panel.h"
 
 namespace omega {
-namespace Button {}
+namespace Button {
+using namespace omega::Panel;
+
+namespace Declare{
+using namespace omega::Panel::Declare;
+
+}
+}
 
 namespace TextButton {
 void SetLabel(std::string label);

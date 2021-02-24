@@ -6,6 +6,7 @@
 #include "renderer.h"
 #include "forward_declarations.h"
 #include "declarative.h"
+#include "brush.h"
 
 namespace omega {
 
@@ -89,6 +90,8 @@ struct State {
     level = 0;
   }
 
+  void UpdateTheme();
+
   uint32_t level{0};
   uint32_t current_id{0};
   std::string line{""};
@@ -102,7 +105,12 @@ struct State {
   bool is_pressed{false};
   bool is_moving{false};
   Renderer* renderer{nullptr};
+  ThemeStates* theme_states{nullptr};
+  Theme* theme{nullptr};
+
   std::map <uint, PanelData> panel_data;
+  Brush brush;
+  PanelData* current_panel_data{nullptr};
 };
 
 extern DeclarativeManager dm;

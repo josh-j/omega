@@ -1,6 +1,8 @@
 #pragma once
 
 #include "common.h"
+#include "font.h"
+#include "forward_declarations.h"
 
 namespace omega {
 
@@ -17,6 +19,17 @@ struct Theme {
         is_bevel_reversed(true), is_background_drawn(true), is_top_padded(true),
         is_right_padded(true), is_bottom_padded(true), is_left_padded(true),
         is_defined(false) {}
+
+  void Panel(Brush& brush, const Rect& rect);
+  void PanelBackground(Brush& brush, const Rect& rect);
+  void PanelBackground(Brush& brush, const Point& pos, const Size& size);
+  void PanelFrame(Brush& brush, const Rect& rect);
+  void PanelFrame(Brush& brush, const Point& pos, const Size& size);
+  void Text(const Point& position, const std::string& text);
+  void Text(const Rect& rect, const std::string& text);
+  void Text(const Rect& rect, Font::HorizontalAlign halign, Font::VerticleAlign valign, const std::string& text);
+  void Text(const Rect& rect, const Point& offset_text, const std::string& text);
+  void Text(const Rect& rect, const Point& offset_text, Font::HorizontalAlign halign, Font::VerticleAlign valign, const std::string& text);
 
   Color color_background;
   Color color_foreground;
@@ -49,6 +62,21 @@ struct Theme {
   bfbool is_bottom_padded : 1;
   bfbool is_left_padded : 1;
   bfbool is_defined : 1;
+};
+
+struct ThemeStates {
+  //constexpr static char *const kStateNames[4] = { "normal", "hovered", "selected", "held" };
+
+  enum PanelStates {
+    kStateNormal = 0,
+    kStateHovered,
+    kStateSelected,
+    kStateFocused,
+    kStateHeld,
+    kStateNum
+  };
+
+  Theme themes[5];
 };
 
 } // namespace omega

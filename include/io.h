@@ -88,8 +88,8 @@ struct InputData {
     num_lock_(false), caps_lock_(false), shift_(false), control_(false), alt_(false) {}
   ~InputData() = default;
 
-  Point mouse_position_{};
-  Point mouse_move_delta_{};
+  Point mouse_position_{0.0f, 0.0f};
+  Point mouse_move_delta_{0.0f, 0.0f};
   MouseButton mouse_button_;
   uint key_;
   uint num_clicks_;
@@ -114,7 +114,7 @@ extern InputData ind;
 void KeyPress(uint key);
 void KeyRelease(uint key);
 void SetInputModifier(InputModifier modifier, bool activated);
-void MouseMove(int x, int y);
+void MouseMove(float x, float y);
 void MousePress(MouseButton button);
 void MouseRelease(MouseButton button);
 void MouseWheelDelta(uint offset_delta);

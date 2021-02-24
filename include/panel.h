@@ -8,13 +8,13 @@
 // What does this do?
 // It declares the entry of a new gui "object" or tree structure
 namespace omega {
+
+
 namespace Panel {
 
 /* We need to start small: we first build a simple "View" where we have a rectangle capable of being moved, resized, colored
 ** and capable of holding "children."
 */
-
-
 
 bool Contains(float xpos, float ypos);
 // bool Contains(const Point &point);
@@ -40,6 +40,7 @@ void OnMouseDoubleClick();
 void OnMouseWheel();
 Rect& Area(Rect& rect);
 Color& SetColor(int r, int g, int b, int a);
+void SetTheme(ThemeStates& themes);
 
 namespace Declare {
 void Begin();
@@ -49,6 +50,7 @@ bool Contains(float xpos, float ypos);
 void Draw();
 Rect& Area(Rect rect);
 Color& Color(int r, int g, int b, int a);
+void SetTheme(ThemeStates& themes);
 
 } // namespace Declare
 

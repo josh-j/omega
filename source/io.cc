@@ -35,7 +35,7 @@ void SetInputModifier(InputModifier modifier, bool activated) {
   }
 }
 
-void MouseMove(int x, int y) {
+void MouseMove(float x, float y) { // TODO(unknown): make float
   ind.mouse_move_delta_.set(x - ind.mouse_position_.x, y - ind.mouse_position_.y);
   ind.mouse_position_.set(x, y);
   //ind.mouse_moved_ = (ind.mouse_move_delta_.x < 1.0f && ind.mouse_move_delta_.y < 1.0f) ? false :true;
@@ -62,6 +62,7 @@ void EndFrame() {
   ind.mouse_released_ = false;
   ind.key_released_ = false;
   ind.mouse_moved_ = false;
+  ind.mouse_move_delta_ = 0.0f;
 }
 
 void OnMousePress(std::function<void()> callback) {
