@@ -26,8 +26,5 @@ doc/**/*.pdf
 
 *.user
 
-.projectile
-
 compile_commands.json
 
-.dir-locals.el
