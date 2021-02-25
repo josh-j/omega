@@ -48,7 +48,7 @@ void CL_Initialize() {
   omega::s.brush.set_renderer(&renderer);
   lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
   lgr::emit() << "Init";
-  renderer.BuildFont("/usr/share/fonts/droid/DroidSans.ttf", 14, 0, 0, 0);
+  renderer.BuildFont("/usr/share/fonts/droid/DroidSans.ttf", 14, 0, 0, nullptr);
 
   struct basetype {};
   Painter<basetype> p;
@@ -135,6 +135,13 @@ void CL_Draw() {
   omega::dm.execute();
   IO::EndFrame();
   s.EndFrame();
+  s.brush.Cursor(IO::ind.mouse_position_, omega::kCursorArrow);
+
+
+  if (s.is_child) {
+    std::vector<int> v;
+    v.clear();
+  }
   /*
   **
   ** OnPress could set a flag is_moving = true, could call a callback for a button, could say highlight this text

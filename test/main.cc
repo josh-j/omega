@@ -96,7 +96,10 @@ int main(int argc, char **argv) {
   glutInitWindowPosition(0, 0);
 
   // Creates a window using internal glut functionality
-  glutCreateWindow("Hello!");
+  glutCreateWindow("omega");
+
+
+  glutSetCursor(GLUT_CURSOR_NONE);
 
   // passes reshape and display functions to the OpenGL machine for callback
   glutReshapeFunc(reshape);
@@ -106,7 +109,9 @@ int main(int argc, char **argv) {
   glutMouseFunc (MouseButton);
   glutPassiveMotionFunc(MouseMotion);
   glutMotionFunc (MouseMotion);
+
   init();
+
 
   // Starts the program.
   glutMainLoop();
