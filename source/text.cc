@@ -1,10 +1,10 @@
 #include "text.h"
 
-#include "state.h"
+#include "gui.h"
 
 namespace omega {
 namespace Text {
-void Set(std::string text) { s.line = text; }
+void Set(std::string text) { }
 
 }  // namespace Text
 }  // namespace omega

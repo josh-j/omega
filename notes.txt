@@ -2,9 +2,11 @@ https://web.archive.org/web/20200301061846/http://www.thinkbottomup.com.au/site/
 https://www.youtube.com/watch?v=VMOsz61Hg84
 
 
+Need someway of differentiated between composable classes like Panel and objects like Theme
 
+I could do omega::Composable::Panel, omega::Composable::State omega::Composable::Button
 
-
+Separate draw from io_update (can run declarative branches depending on flag)
 
 
 

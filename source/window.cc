@@ -1,5 +1,5 @@
 #include "window.h"
-#include "state.h"
+#include "gui.h"
 #include "brush.h"
 #include "color.h"
 

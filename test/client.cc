@@ -14,7 +14,8 @@
 #include "client.h"
 #include "brush.h"
 #include "renderer_ogl.h"
-#include "state.h"
+#include "gui.h"
+
 #include "window.h"
 #include "io.h"
 #include "panel.h"
@@ -34,78 +35,49 @@ using namespace omega;
 ThemeStates theme_states;
 void CL_Initialize() {
 
-  theme_states.themes[kStateNormal].is_bordered = true;
-  theme_states.themes[kStateNormal].is_beveled = false;
-  theme_states.themes[kStateNormal].color_border.set(64, 64, 64, 255);
+  theme_states.themes[Panel::kStateNormal].is_bordered = true;
+  theme_states.themes[Panel::kStateNormal].is_beveled = false;
+  theme_states.themes[Panel::kStateNormal].color_border.set(64, 64, 64, 255);
 
 
-  theme_states.themes[kStateHovered].color_border.set(0, 122, 204, 92);
-  theme_states.themes[kStateHeld].color_border.set(0, 122, 204, 255);
+  theme_states.themes[Panel::kStateHovered].color_border.set(0, 122, 204, 92);
+  theme_states.themes[Panel::kStateHeld].color_border.set(0, 122, 204, 255);
 
-  theme_states.themes[kStateFocused].color_background.set(92, 92, 92, 255);
+  theme_states.themes[Panel::kStateFocused].color_background.set(92, 92, 92, 255);
 
-  omega::s.renderer = &renderer;
-  omega::s.brush.set_renderer(&renderer);
+  omega::GUI::set_renderer(renderer);
   lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
   lgr::emit() << "Init";
   renderer.BuildFont("/usr/share/fonts/droid/DroidSans.ttf", 14, 0, 0, nullptr);
 
-  struct basetype {};
-  Painter<basetype> p;
-  p.Paint();
 
-  Panel::Declare::SetTheme(theme_states);
   Panel::Declare::Begin();
+  Panel::Declare::SetTheme(theme_states);
+  //Panel::Declare::SetVisible(false);
   Panel::Declare::Area(Rect(50, 50, 150, 150));
+  Panel::SetMinimumSize(50.0f, 50.0f);
 
-
-  auto changePress = []() { // belongs in panel
-    if (s.current_panel_data == nullptr)
-      return;
-
-    if (Panel::Contains(IO::ind.mouse_position_.x, IO::ind.mouse_position_.y)) {
-      s.current_panel_data->is_hovered_ = true;
-      if (IO::ind.mouse_pressed_) {
-        s.current_panel_data->is_held_ = true;
-      } else {
-        s.current_panel_data->is_held_ = false;
-      }
-    } else {
-      s.current_panel_data->is_hovered_ = false;
-    }
-
-    if (s.current_panel_data->is_held_) {
-      s.abs_rect->x += IO::ind.mouse_move_delta_.x;
-      s.abs_rect->y += IO::ind.mouse_move_delta_.y;
-    }
-  };
-
-  IO::Declare::OnMouseMove(changePress);
+  IO::Declare::OnMouseMove(Panel::OnMouseMove);
   Panel::Declare::Draw();
   {
+    /*
+    // RAII
+    Button btn(state, io, theme, ect);
+    btn.area(Rect(5,5,25,25));
+    btn.OnMouseMove(changeButtonPress);
+    btn.draw();
+
+    // General wrapper for all functions to be added as declaration
+    make_decl(Button::SetTheme, theme_states);
+    make_decl(Button::Begin);
+    make_decl(Button::Area, Rect(5,5,5,25));
+     */
+
     Button::Declare::SetTheme(theme_states);
     Button::Declare::Begin();
-    Button::Declare::Area(Rect(5, 5, 25, 25));
-    auto changeButtonPress = []() { // belongs in panel
-      if (s.current_panel_data == nullptr)
-        return;
+    Button::Declare::Area(Rect(25, 25, 25, 25));
 
-      lgr::emit() << "here: " << IO::ind.mouse_position_.x << " " << IO::ind.mouse_position_.y;
-      lgr::emit() << "pos: " << s.abs_rect->x << " " << s.abs_rect->y;
-      if (Button::Contains(IO::ind.mouse_position_.x,
-                          IO::ind.mouse_position_.y)) {
-        lgr::emit() << "here2";
-        s.current_panel_data->is_hovered_ = true;
-        if (IO::ind.mouse_pressed_) {
-          s.current_panel_data->is_held_ = true;
-        } else {
-          s.current_panel_data->is_held_ = false;
-        }
-      } else {
-        s.current_panel_data->is_hovered_ = false;
-      }
-    };
-    IO::Declare::OnMouseMove(changeButtonPress);
+    IO::Declare::OnMouseMove(Button::OnMouseMove);
     Button::Declare::Draw();
     Button::Declare::End();
   }
@@ -113,35 +85,10 @@ void CL_Initialize() {
 }
 
 void CL_Draw() {
-
-  // Color clr(192,128,128, 128);
-  // if (IO::ind.mouse_button_ == omega::IO::MBTN_LEFT)
-  //   clr.set(192,128,128,255);
-
-  // Window::SetShape(
-  //     50, 50, 150, 150,
-  //     clr); // this isn't always going to be here
-  // Window::Draw();
-  // {
-  //   Window::SetShape(50, 50, 75, 75,
-  //                    Color(192, 128, 128, 192)); // needs to be relative to prev
-  //   Window::Draw();
-  // }
-
-  renderer.SetColor(255, 255, 255, 255);
-  renderer.RenderTextf(0, 300, 300, "mouse x: %f    mouse y: %f", omega::IO::ind.mouse_move_delta_.x, omega::IO::ind.mouse_move_delta_.y);
-  if (s.current_panel_data != nullptr)
-  renderer.RenderTextf(0, 300, 325, "hovered: %d", omega::s.current_panel_data->is_hovered_);
-  omega::dm.execute();
+  omega::GUI::dm.execute();
   IO::EndFrame();
-  s.EndFrame();
-  s.brush.Cursor(IO::ind.mouse_position_, omega::kCursorArrow);
+  omega::GUI::EndFrame();
 
-
-  if (s.is_child) {
-    std::vector<int> v;
-    v.clear();
-  }
   /*
   **
   ** OnPress could set a flag is_moving = true, could call a callback for a button, could say highlight this text

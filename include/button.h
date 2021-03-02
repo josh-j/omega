@@ -5,13 +5,16 @@
 
 namespace omega {
 namespace Button {
+using namespace omega::GUI;
 using namespace omega::Panel;
+void Draw();
+void OnMouseMove();
 
 namespace Declare{
 using namespace omega::Panel::Declare;
 
-}
-}
+} // namespace Declare
+} // nammespace Button
 
 namespace TextButton {
 void SetLabel(std::string label);

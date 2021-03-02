@@ -1,6 +1,6 @@
 #include "brush.h"
 #include <cmath>
-#include "state.h"
+#include "gui.h"
 
 namespace omega {
 Brush::Brush() : renderer_(nullptr) {}

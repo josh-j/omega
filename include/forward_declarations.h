@@ -20,7 +20,9 @@ struct ThemeStates;
 struct Point;
 struct Size;
 class Brush;
-
+namespace Panel {
+struct PanelData;
+}
 // Event Data
 struct InputData;
 

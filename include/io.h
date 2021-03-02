@@ -83,33 +83,7 @@ enum MouseButton {
   MBTN_WHEEL
 };
 
-struct InputData {
-  InputData() : key_(0), num_clicks_(0), mwheel_delta_(0), key_down_(false), scroll_lock_(false),
-    num_lock_(false), caps_lock_(false), shift_(false), control_(false), alt_(false) {}
-  ~InputData() = default;
 
-  Point mouse_position_{0.0f, 0.0f};
-  Point mouse_move_delta_{0.0f, 0.0f};
-  MouseButton mouse_button_;
-  uint key_;
-  uint num_clicks_;
-  uint mwheel_delta_;
-  bool key_down_;
-  bool scroll_lock_;
-  bool num_lock_;
-  bool caps_lock_;
-  bool shift_;
-  bool control_;
-  bool alt_;
-
-  bool key_pressed_{false};
-  bool key_released_{false};
-  bool mouse_moved_{false};
-  bool mouse_pressed_{false};
-  bool mouse_released_{false};
-};
-
-extern InputData ind;
 
 void KeyPress(uint key);
 void KeyRelease(uint key);
@@ -120,6 +94,13 @@ void MouseRelease(MouseButton button);
 void MouseWheelDelta(uint offset_delta);
 void EndFrame();
 void GLUT_MousePress();
+
+// Helpers
+
+const Point& mouse_position();
+const Point& mouse_delta();
+bool is_mouse_pressed();
+
 
 namespace Declare {
 void OnMousePress(std::function<void()> callback);
