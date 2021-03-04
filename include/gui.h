@@ -10,10 +10,14 @@
 
 namespace omega {
 
+// What needs to be private goes into the implementation
+// We can put GuiContext in here, but have the used instantation in the implementation and only accessible through functions
 
 // Maybe this should be GUIState, then we have IOState and DeclarativeState
 // Or should we have State then IO and Declaratives are in State < if everything is in State we can better restrict usage of state
 namespace GUI {
+
+const Panel::PanelData& PanelContext();
 
 void Begin();
 void Draw();

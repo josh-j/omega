@@ -5,96 +5,100 @@ namespace omega {
 namespace IO {
 
 struct IOData {
-  IOData() : key_(0), num_clicks_(0), mwheel_delta_(0), key_down_(false), scroll_lock_(false),
-    num_lock_(false), caps_lock_(false), shift_(false), control_(false), alt_(false) {}
+  IOData() : key(0), num_clicks(0), mwheel_delta(0), key_down(false), scroll_lock(false),
+    num_lock(false), caps_lock(false), shift(false), control(false), alt(false) {}
   ~IOData() = default;
 
   //void SubscribeTo_MousePress(DeclarativeManager& dm, std::function<void()> callback);
 
-  Point mouse_position_{0.0f, 0.0f};
-  Point mouse_move_delta_{0.0f, 0.0f};
-  MouseButton mouse_button_;
-  uint key_;
-  uint num_clicks_;
-  uint mwheel_delta_;
-  bool key_down_;
-  bool scroll_lock_;
-  bool num_lock_;
-  bool caps_lock_;
-  bool shift_;
-  bool control_;
-  bool alt_;
+  Point mouse_position{0.0f, 0.0f};
+  Point mouse_move_delta{0.0f, 0.0f};
+  MouseButton mouse_button;
+  uint key;
+  uint num_clicks;
+  uint mwheel_delta;
+  bool key_down;
+  bool scroll_lock;
+  bool num_lock;
+  bool caps_lock;
+  bool shift;
+  bool control;
+  bool alt;
 
-  bool key_pressed_{false};
-  bool key_released_{false};
-  bool mouse_moved_{false};
-  bool mouse_pressed_{false};
-  bool mouse_released_{false};
+  bool key_pressed{false};
+  bool key_released{false};
+  bool mouse_moved{false};
+  bool mouse_pressed{false};
+  bool mouse_released{false};
 };
 
 IOData s;
 
 
+const IOData& Context() {
+  return s;
+}
+
 void KeyPress(uint key) {
-  s.key_ = key;
+  s.key = key;
   //data_.num_clicks_ += 1;
-  s.key_down_ = true;
-  s.key_pressed_ = true;
-  s.key_released_ = false;
+  s.key_down = true;
+  s.key_pressed = true;
+  s.key_released = false;
 }
 
 void KeyRelease(uint key) {
-  s.key_ = key;
+  s.key = key;
   //if (data_.num_clicks_ > 0) data_.num_clicks_ -= 1;
-  s.key_down_ = false;
-  s.key_pressed_ = false;
+  s.key_down = false;
+  s.key_pressed = false;
 
 }
 
 void SetInputModifier(InputModifier modifier, bool activated) {
   switch (modifier) {
-  case IMOD_SCROLLLOCK: s.scroll_lock_ = activated; break;
-  case IMOD_NUMLOCK: s.num_lock_ = activated; break;
-  case IMOD_CAPSLOCK: s.caps_lock_ = activated; break;
-  case IMOD_SHIFT: s.shift_ = activated; break;
-  case IMOD_CTRL: s.control_ = activated; break;
-  case IMOD_ALT: s.alt_ = activated; break;
+  case IMOD_SCROLLLOCK: s.scroll_lock = activated; break;
+  case IMOD_NUMLOCK: s.num_lock = activated; break;
+  case IMOD_CAPSLOCK: s.caps_lock = activated; break;
+  case IMOD_SHIFT: s.shift = activated; break;
+  case IMOD_CTRL: s.control = activated; break;
+  case IMOD_ALT: s.alt = activated; break;
   case IMOD_NONE: break;
   }
 }
 
 void MouseMove(float x, float y) { // TODO(unknown): make float
-  s.mouse_move_delta_.set(x - s.mouse_position_.x, y - s.mouse_position_.y);
-  s.mouse_position_.set(x, y);
+  s.mouse_move_delta.set(x - s.mouse_position.x, y - s.mouse_position.y);
+  s.mouse_position.set(x, y);
   //ind.mouse_moved_ = (ind.mouse_move_delta_.x < 1.0f && ind.mouse_move_delta_.y < 1.0f) ? false :true;
-  s.mouse_moved_ = true;
+  s.mouse_moved = true;
 }
 
 void MousePress(MouseButton button) {
-  s.num_clicks_ += 1;
-  s.mouse_button_ = button;
-  s.mouse_pressed_ = true;
-  s.mouse_released_ = false;
+  s.num_clicks += 1;
+  s.mouse_button = button;
+  s.mouse_pressed = true;
+  s.mouse_released = false;
 }
 
 void MouseRelease(MouseButton button) {
-  if (s.num_clicks_ > 0) s.num_clicks_ -= 1;
-  s.mouse_button_ = MBTN_NONE;
-  s.mouse_pressed_ = false;
-  s.mouse_released_ = true;
+  if (s.num_clicks > 0) s.num_clicks -= 1;
+  s.mouse_button = MBTN_NONE;
+  s.mouse_pressed = false;
+  s.mouse_released = true;
 }
 
-void MouseWheelDelta(uint offset_delta) { s.mwheel_delta_ += offset_delta; }
+void MouseWheelDelta(uint offset_delta) { s.mwheel_delta += offset_delta; }
 
 void EndFrame() {
-  s.mouse_released_ = false;
-  s.key_released_ = false;
-  s.mouse_moved_ = false;
-  s.mouse_move_delta_ = 0.0f;
+  s.mouse_released = false;
+  s.key_released = false;
+  s.mouse_moved = false;
+  s.mouse_move_delta = 0.0f;
 }
 
 void OnMousePress(std::function<void()> callback) {
-  if (s.mouse_pressed_)
+  if (s.mouse_pressed)
     callback();
 }
 
@@ -105,15 +109,15 @@ void OnMouseMove(std::function<void()> callback) {
 
 
 const Point& mouse_position() {
-  return s.mouse_position_;
+  return s.mouse_position;
 }
 
 const Point& mouse_delta() {
-  return s.mouse_move_delta_;
+  return s.mouse_move_delta;
 }
 
 bool is_mouse_pressed() {
-  return s.mouse_pressed_;
+  return s.mouse_pressed;
 }
 
 namespace Declare {

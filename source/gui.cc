@@ -52,6 +52,14 @@ struct State { // TODO this should be TypeState since its static, e.i. there is 
 
 static State& s = State::instance();
 
+const Panel::PanelData& PanelContext() {
+  static Panel::PanelData empty_pd;
+  assert(s.current_panel_data != nullptr);
+  if (s.current_panel_data == nullptr)
+    return empty_pd;
+  return *s.current_panel_data;
+}
+
 void Begin() {
   if (s.level > 0) {
     s.is_child = true;

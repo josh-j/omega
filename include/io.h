@@ -83,8 +83,8 @@ enum MouseButton {
   MBTN_WHEEL
 };
 
-
-
+struct IOData;
+const IOData& Context();
 void KeyPress(uint key);
 void KeyRelease(uint key);
 void SetInputModifier(InputModifier modifier, bool activated);

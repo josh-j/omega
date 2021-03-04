@@ -39,6 +39,21 @@ Rect& Area(Rect& rect) {
   return rect;
 }
 
+struct View {
+  Rect drawn_rect;
+  Rect decl_rect;
+};
+
+Rect MakeDrawnRect(Rect decl_rect, Rect parent_decl_rect, bool is_relative) {
+  if (!is_relative)
+    return decl_rect;
+
+  Rect drawn_rect{decl_rect};
+
+  drawn_rect.pos().adjust(parent_decl_rect.pos());
+  return drawn_rect;
+}
+
 CursorType get_cursor() {
   PanelData &cpd = *GUI::current_panel_data();
   if ((cpd.is_mouseover_left && cpd.is_mouseover_top) ||
