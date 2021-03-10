@@ -73,13 +73,13 @@ void CL_Initialize() {
     make_decl(Button::Area, Rect(5,5,5,25));
      */
 
-    Button::Declare::SetTheme(theme_states);
-    Button::Declare::Begin();
-    Button::Declare::Area(Rect(25, 25, 25, 25));
+    // Button::Declare::SetTheme(theme_states);
+    // Button::Declare::Begin();
+    // Button::Declare::Area(Rect(25, 25, 25, 25));
 
-    IO::Declare::OnMouseMove(Button::OnMouseMove);
-    Button::Declare::Draw();
-    Button::Declare::End();
+    // IO::Declare::OnMouseMove(Button::OnMouseMove);
+    // Button::Declare::Draw();
+    // Button::Declare::End();
   }
   Panel::Declare::End();
 }

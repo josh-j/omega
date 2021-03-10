@@ -52,6 +52,8 @@ struct PanelData {
         is_resize_top_locked(false), is_resize_bottom_locked(false),
         is_size_synced(false) {}
 
+  Rect drawn_rect{0.0f, 0.0f, 0.0f, 0.0f};
+  Rect* decl_rect{nullptr};
   Size   min_size{10.0f, 10.0f};
   Size   max_size{500.0f, 500.0f};
 

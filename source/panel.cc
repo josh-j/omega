@@ -39,20 +39,21 @@ Rect& Area(Rect& rect) {
   return rect;
 }
 
-struct View {
-  Rect drawn_rect;
-  Rect decl_rect;
-};
+  void Area2(Rect &rect, PanelData &ctx) {
+    ctx.drawn_rect.set(rect);
+    ctx.decl_rect = &rect;
 
-Rect MakeDrawnRect(Rect decl_rect, Rect parent_decl_rect, bool is_relative) {
-  if (!is_relative)
-    return decl_rect;
+  // float xdiff = 0.0f;
+  // float ydiff = 0.0f;
 
-  Rect drawn_rect{decl_rect};
-
-  drawn_rect.pos().adjust(parent_decl_rect.pos());
-  return drawn_rect;
-}
+  // if (ctx.is_child) {
+  //   xdiff = delc_rect().x;
+  //   ydiff = delc_rect().y;
+  // }
+  // drawn_rect.x += xdiff;
+  // drawn_rect.y += ydiff;
+  return rect;
+  }
 
 CursorType get_cursor() {
   PanelData &cpd = *GUI::current_panel_data();
