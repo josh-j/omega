@@ -18,6 +18,7 @@ namespace omega {
 namespace GUI {
 
 const Panel::PanelData& PanelContext();
+Panel::PanelData& PanelMutableContext();
 
 void Begin();
 void Draw();
@@ -30,12 +31,10 @@ void EndFrame();
 void set_renderer(Renderer& renderer);
 Rect& delc_rect();
 Rect& drawn_rect();
-void update_delc_rect(Rect& rect);
 bool is_current_child();
 Panel::PanelData* current_panel_data();
 void set_cursor(CursorType cursor_type);
 extern DeclarativeManager dm;
-
 
 namespace ModifiesState {
 /*

@@ -34,7 +34,6 @@ using namespace omega;
 
 ThemeStates theme_states;
 void CL_Initialize() {
-
   theme_states.themes[Panel::kStateNormal].is_bordered = true;
   theme_states.themes[Panel::kStateNormal].is_beveled = false;
   theme_states.themes[Panel::kStateNormal].color_border.set(64, 64, 64, 255);
@@ -48,13 +47,14 @@ void CL_Initialize() {
   omega::GUI::set_renderer(renderer);
   lgr::Sink_Ofstream::Init("omega_log.txt", false, false);
   lgr::emit() << "Init";
-  renderer.BuildFont("/usr/share/fonts/droid/DroidSans.ttf", 14, 0, 0, nullptr);
+  renderer.BuildFont("iosevka-regular.ttf", 14, 0, 0, nullptr);
 
 
   Panel::Declare::Begin();
+  Panel::PanelData& ctx = GUI::PanelMutableContext();
   Panel::Declare::SetTheme(theme_states);
   //Panel::Declare::SetVisible(false);
-  Panel::Declare::Area(Rect(50, 50, 150, 150));
+  Panel::Declare::Area2(Rect(50, 50, 150, 150), &ctx);
   Panel::SetMinimumSize(50.0f, 50.0f);
 
   IO::Declare::OnMouseMove(Panel::OnMouseMove);
@@ -73,13 +73,14 @@ void CL_Initialize() {
     make_decl(Button::Area, Rect(5,5,5,25));
      */
 
-    // Button::Declare::SetTheme(theme_states);
-    // Button::Declare::Begin();
-    // Button::Declare::Area(Rect(25, 25, 25, 25));
+    Button::Declare::Begin();
+    Panel::PanelData& ctx = GUI::PanelMutableContext();
+    Button::Declare::SetTheme(theme_states);
+    Button::Declare::Area2(Rect(25, 25, 25, 25), &ctx);
 
-    // IO::Declare::OnMouseMove(Button::OnMouseMove);
-    // Button::Declare::Draw();
-    // Button::Declare::End();
+    IO::Declare::OnMouseMove(Button::OnMouseMove);
+    Button::Declare::Draw();
+    Button::Declare::End();
   }
   Panel::Declare::End();
 }

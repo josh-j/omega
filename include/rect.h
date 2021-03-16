@@ -72,6 +72,7 @@ class Rect {
 
   void set_bottompos(float bottompos) { h = bottompos - y; }
 
+  bool empty() const { return x == 0.0f && y == 0.0f && w == 0.0f && h == 0.0f; }
   bool contains(float xpos, float ypos) const {
     return (xpos >= x && ypos >= y && xpos <= x + w && ypos <= y + h);
   }
@@ -100,6 +101,9 @@ class Rect {
   Point pos() const { return Point(x, y); }
   Size size() const { return Size(w, h); }
 
+  std::string print() const {
+    return std::to_string(x) + ' ' + std::to_string(y) + ' ' + std::to_string(w) + ' ' +  std::to_string(h);
+  }
   float x, y, w, h;
 };
 

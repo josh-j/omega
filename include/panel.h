@@ -35,7 +35,7 @@ enum RequestType { kRequestNone, kRequestInit, kRequestLoadFont };
 
 struct PanelData {
   PanelData()
-      : is_initialized(false), is_managed(true), is_enabled(true),
+      : is_initialized(false), is_child(false), is_managed(true), is_enabled(true),
         is_visible(true), is_held(false), is_hovered(false),
         is_selected(false), is_focused(false), is_typing_in(false),
         is_maximized(false), is_minimized(false), is_moving(false),
@@ -52,12 +52,16 @@ struct PanelData {
         is_resize_top_locked(false), is_resize_bottom_locked(false),
         is_size_synced(false) {}
 
+
+  PanelData* parent{nullptr};
+
   Rect drawn_rect{0.0f, 0.0f, 0.0f, 0.0f};
   Rect* decl_rect{nullptr};
   Size   min_size{10.0f, 10.0f};
   Size   max_size{500.0f, 500.0f};
 
   bfbool is_initialized : 1;
+  bfbool is_child : 1;
   bfbool is_managed : 1; // panel manager automatically deletes and creates
   bfbool is_enabled : 1; // when disabled takes no input and draws or outputs
                           // nothing
@@ -111,7 +115,7 @@ struct PanelData {
 /******************************************************************************/
 void Draw();
 void OnMouseMove();
-Rect& Area(Rect& rect);
+Rect& Area(Rect* rect);
 void SetMinimumSize(float min_w, float min_h);
 
 
@@ -121,6 +125,7 @@ void Begin();
 void End();
 void Draw();
 Rect& Area(Rect rect);
+Rect& Area2(Rect rect, PanelData* ctx);
 void SetTheme(ThemeStates& themes);
 
 } // namespace Declare

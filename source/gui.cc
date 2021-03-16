@@ -18,19 +18,12 @@ struct State { // TODO this should be TypeState since its static, e.i. there is 
   uint32_t current_id{0};
   uint32_t parent_id{0};
   uint32_t parent_level{0};
-  std::string line{""};
-  std::vector<std::string> many_lines{};
   CursorType cursor_type{kCursorArrow};
 
 
   // > Transient State
-  Rect null_rect{0.0f, 0.0f, 0.0f, 0.0f};
-  Rect* abs_rect{&null_rect};
-  Rect rect{0.0f, 0.0f, 0.0f, 0.0f};
-  Color color{255,255,255,255};
-  bool is_child{false};
-  bool is_pressed{false};
-  bool is_moving{false};
+  //bool is_pressed{false};
+  //bool is_moving{false};
   Renderer* renderer{nullptr};
   ThemeStates* theme_states{nullptr};
   Theme* theme{nullptr};
@@ -53,25 +46,37 @@ struct State { // TODO this should be TypeState since its static, e.i. there is 
 static State& s = State::instance();
 
 const Panel::PanelData& PanelContext() {
-  static Panel::PanelData empty_pd;
   assert(s.current_panel_data != nullptr);
-  if (s.current_panel_data == nullptr)
-    return empty_pd;
   return *s.current_panel_data;
 }
 
+Panel::PanelData& PanelMutableContext() {
+  assert(s.current_panel_data != nullptr);
+  return *s.current_panel_data;
+}
+/*
+** Begin 0 null
+**   Begin 1 0
+**     Begin 2 1
+**     End
+**     Begin 3 1
+**     End
+**  End
+** End
+ */
 void Begin() {
+  s.current_panel_data = &s.panel_data[s.current_id];
+  ++s.current_id;
   if (s.level > 0) {
-    s.is_child = true;
-    if (s.parent_level < s.level + 1) {
+    PanelMutableContext().is_child = true;
+    PanelMutableContext().parent = &s.panel_data[s.parent_id];
 
-    }
+  }
+  if (s.level > 2) {
+    ++s.parent_id;
   }
 
   ++s.level;
-  ++s.current_id;
-
-  s.current_panel_data = &s.panel_data[s.current_id];
 
   // lgr::emit() << "level: " << s.level << "\n" << "current_id: " <<
   // s.current_id << "\n";
@@ -80,8 +85,8 @@ void Begin() {
 
 void End() { // TODO this belongs in state
   assert(s.level > 0);
-  if (s.level == 1) {
-    s.is_child = false;
+  if (s.level > 2) {
+    --s.parent_id;
   }
   --s.level;
 }
@@ -89,13 +94,18 @@ void End() { // TODO this belongs in state
 void Draw() { // TODO this belongs in state????
   // s.brush.Rectangle(s.rect.pos(), s.rect.size(),
   // s.theme->themes[kStateNormal].color_background);
+  Panel::PanelData& ctx = GUI::PanelMutableContext();
   UpdateTheme();
-  s.theme->Panel(s.brush, s.rect);
+
+  // if (ctx.decl_rect != nullptr)
+  //   lgr::emit() << ctx.decl_rect->print() << " ptr: " << ctx.decl_rect;
+  s.theme->Panel(s.brush, ctx.drawn_rect);
   s.brush.Cursor(IO::mouse_position(), s.cursor_type);
 
 }
 
 void EndFrame() {
+  s.parent_id = 0;
   s.current_id = 0;
   s.level = 0;
 }
@@ -143,18 +153,14 @@ void set_renderer(Renderer& renderer) {
   s.brush.set_renderer(&renderer); // TODO use ref
 }
 Rect& delc_rect() {
-  return *s.abs_rect;
+  return *PanelMutableContext().decl_rect;
 }
 Rect& drawn_rect() {
-  return s.rect;
-}
-
-void update_delc_rect(Rect& rect) {
-  s.abs_rect = &rect;
+  return PanelMutableContext().drawn_rect;
 }
 
 bool is_current_child() {
-  return s.is_child;
+  return PanelMutableContext().is_child;
 }
 
 void set_cursor(CursorType cursor_type) {

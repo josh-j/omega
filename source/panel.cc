@@ -19,41 +19,48 @@ void Draw() {
 
 Rect& Area(Rect& rect) {
 
-  Rect& drawn_rect = GUI::drawn_rect();
-  Rect& decl_rect = GUI::delc_rect();
+  // Rect& drawn_rect = GUI::drawn_rect();
+  // Rect& decl_rect = GUI::delc_rect();
 
-  drawn_rect.set(rect);
-  // TODO abs rect should be declared_rect and rect should be drawn_rect
-
-  float xdiff = 0.0f;
-  float ydiff = 0.0f;
-
-  if (GUI::is_current_child()) {
-    xdiff = delc_rect().x;
-    ydiff = delc_rect().y;
-  }
-  GUI::update_delc_rect(rect);   // TODO fix needing a pointer
-  //delc_rect = &rect; // TODO fix needing a pointer
-  drawn_rect.x += xdiff;
-  drawn_rect.y += ydiff;
-  return rect;
-}
-
-  void Area2(Rect &rect, PanelData &ctx) {
-    ctx.drawn_rect.set(rect);
-    ctx.decl_rect = &rect;
+  // drawn_rect.set(rect);
+  // // TODO abs rect should be declared_rect and rect should be drawn_rect
 
   // float xdiff = 0.0f;
   // float ydiff = 0.0f;
 
-  // if (ctx.is_child) {
+  // if (GUI::is_current_child()) {
   //   xdiff = delc_rect().x;
   //   ydiff = delc_rect().y;
   // }
+  // GUI::update_delc_rect(rect);   // TODO fix needing a pointer
+  // //delc_rect = &rect; // TODO fix needing a pointer
   // drawn_rect.x += xdiff;
   // drawn_rect.y += ydiff;
   return rect;
+}
+
+Rect& Area2(Rect &rect, PanelData* ctx) {
+  // if (!ctx.drawn_rect.empty())
+    // return rect;
+  if (ctx->decl_rect != nullptr)
+  lgr::emit() << "Decl: " << ctx->decl_rect->print() << " ptr: " << ctx->decl_rect;
+  lgr::emit() << "Hmm: " << rect.print();
+  ctx->drawn_rect.set(rect); // make drawn_rect the same as decl_rect
+  ctx->decl_rect = &rect;
+
+  float xdiff = 0.0f;
+  float ydiff = 0.0f;
+
+  if (ctx->is_child) {
+    xdiff = ctx->parent->decl_rect->x;
+    ydiff = ctx->parent->decl_rect->y;
   }
+
+  ctx->drawn_rect.x += xdiff;
+  ctx->drawn_rect.y += ydiff;
+
+  return rect;
+}
 
 CursorType get_cursor() {
   PanelData &cpd = *GUI::current_panel_data();
@@ -74,13 +81,17 @@ CursorType get_cursor() {
 }
 
 void do_move(float x, float y) {
-  PanelData& cpd = *GUI::current_panel_data();
-  if ((x > GUI::drawn_rect().x && !cpd.is_move_right_locked) ||
-      !cpd.is_move_left_locked)
-    GUI::delc_rect().x = x;
-  if ((y > GUI::drawn_rect().y && !cpd.is_move_down_locked) ||
-      !cpd.is_move_up_locked)
-    GUI::delc_rect().y = y;
+  PanelData& ctx = GUI::PanelMutableContext();
+  if ((x > GUI::drawn_rect().x && !ctx.is_move_right_locked) ||
+      !ctx.is_move_left_locked)
+  {
+   ctx.decl_rect->x = x;
+  }
+  if ((y > GUI::drawn_rect().y && !ctx.is_move_down_locked) ||
+      !ctx.is_move_up_locked)
+  {
+    ctx.decl_rect->y = y;
+  }
 }
 
 void do_resize() {
@@ -156,35 +167,32 @@ void do_resize() {
 
 // TODO pass cpd and io?
 void OnMouseMove() {
-  if (GUI::current_panel_data() == nullptr)
-    return;
+  PanelData& ctx = GUI::PanelMutableContext();
 
-  PanelData& cpd = *GUI::current_panel_data();
-
-  if (GUI::drawn_rect().contains(IO::mouse_position())) {
-    cpd.is_hovered = true;
+  if (ctx.drawn_rect.contains(IO::mouse_position())) {
+    ctx.is_hovered = true;
     if (IO::is_mouse_pressed()) {
-      cpd.is_held = true;
+      ctx.is_held = true;
     } else {
-      cpd.is_held = false;
+      ctx.is_held = false;
     }
   } else {
-    cpd.is_hovered = false;
+    ctx.is_hovered = false;
   }
 
   do_resize();
-  if (!cpd.is_resizing && cpd.is_held) {
-    if ((IO::mouse_position().y > GUI::drawn_rect().y) &&
-        (IO::mouse_position().y < (GUI::drawn_rect().y + 25.0f))) {
-      cpd.is_moving = true;
+  if (!ctx.is_resizing && ctx.is_held) {
+    if ((IO::mouse_position().y > ctx.drawn_rect.y) &&
+        (IO::mouse_position().y < (ctx.drawn_rect.y + 25.0f))) {
+      ctx.is_moving = true;
       GUI::set_cursor(kCursorMove);
     }
-    if (cpd.is_moving) {
-      do_move(GUI::drawn_rect().x + IO::mouse_delta().x, GUI::drawn_rect().y + IO::mouse_delta().y);
+    if (ctx.is_moving) {
+      do_move(ctx.drawn_rect.x + IO::mouse_delta().x, ctx.drawn_rect.y + IO::mouse_delta().y);
       GUI::set_cursor(kCursorMove);
     }
   } else {
-    cpd.is_moving = false;
+    ctx.is_moving = false;
   }
 
   GUI::set_cursor(get_cursor());
@@ -222,6 +230,7 @@ void SetVisible(bool is_visible) {
   GUI::current_panel_data()->is_visible = is_visible;
 }
 
+// TODO this could be very bug prone
 void Begin() {
   // Declarable::add(omega::Panel::Begin);
   dm.add(omega::Panel::Begin);
@@ -234,9 +243,15 @@ void End() {
 }
 
 Rect& Area(Rect rect) { // TODO Why save arguments when I can just put them in PanelData?
-  dm.add(omega::Panel::Area, rect);
+  //dm.add(omega::Panel::Area, rect);
   return omega::Panel::Area(rect);
 }
+
+Rect &Area2(Rect rect, PanelData* ctx) {
+  dm.add(omega::Panel::Area2, rect, ctx);
+  return omega::Panel::Area2(rect, ctx);
+}
+
 void Draw() {
   dm.add(omega::Panel::Draw);
   omega::Panel::Draw();

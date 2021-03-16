@@ -1,0 +1,348 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "#include <iostream>\n#include <vector>\n#ifdef __APPLE__\n#include <GLUT/glut.h>\n#include <OpenGL/gl.h>\n#include <OpenGL/glu.h>\n#else\n#include <GL/gl.h>\n#include <GL/glu.h>\n#include <GL/glut.h>\n\n#endif\n\n#include \"client.h\"\n#include \"brush.h\"\n#include \"renderer_ogl.h\"\n#include \"state.h\"\n#include \"window.h\"\n#include \"io.h\"\n#include \"panel.h\"\n#include \"mixins.h\"\n#include \"button.h\"\n#include \"theme.h\"\n\nnamespace {\nchar work_path[256];\nomega_test::RendererOGL renderer;\n// system ui(&renderer); // glrenderer()\n// logviewer* logviewer = new logviewer;\n} // namespace\n\nusing namespace omega;\n\nThemeStates theme_states;\nvoid CL_Initialize() {\n\n  theme_states.themes[kStateNormal].is_bordered = true;\n  theme_states.themes[kStateNormal].is_beveled = false;\n  theme_states.themes[kStateNormal].color_border.set(64, 64, 64, 255);\n\n\n  theme_states.themes[kStateHovered].color_border.set(0, 122, 204, 92);\n  theme_states.themes[kStateHeld].color_border.set(0, 122, 204, 255);\n\n  theme_states.themes[kStateFocused].color_background.set(92, 92, 92, 255);\n\n  omega::s.renderer = &renderer;\n  omega::s.brush.set_renderer(&renderer);\n  lgr::Sink_Ofstream::Init(\"omega_log.txt\", false, false);\n  lgr::emit() << \"Init\";\n  renderer.BuildFont(\"/usr/share/fonts/droid/DroidSans.ttf\", 14, 0, 0, nullptr);\n\n  struct basetype {};\n  Painter<basetype> p;\n  p.Paint();\n  p.Paint();\n\n  Panel::Declare::SetTheme(theme_states);\n  Panel::Declare::Begin();\n  Panel::Declare::Area(Rect(50, 50, 150, 150));\n\n\n  auto changePress = []() { // belongs in panel\n    if (s.current_panel_data == nullptr)\n      return;\n\n    if (Panel::Contains(IO::ind.mouse_position_.x, IO::ind.mouse_position_.y)) {\n      s.current_panel_data->is_hovered_ = true;\n      if (IO::ind.mouse_pressed_) {\n        s.current_panel_data->is_held_ = true;\n      } else {\n        s.current_panel_data->is_held_ = false;\n      }\n    } else {\n      s.current_panel_data->is_hovered_ = false;\n    }\n\n    if (s.current_panel_data->is_held_) {\n      s.abs_rect->x += IO::ind.mouse_move_delta_.x;\n      s.abs_rect->y += IO::ind.mouse_move_delta_.y;\n    }\n  };\n\n  IO::Declare::OnMouseMove(changePress);\n  Panel::Declare::Draw();\n  {\n    Button::Declare::SetTheme(theme_states);\n    Button::Declare::Begin();\n    Button::Declare::Area(Rect(5, 5, 25, 25));\n    auto changeButtonPress = []() { // belongs in panel\n      if (s.current_panel_data == nullptr)\n        return;\n\n      lgr::emit() << \"here: \" << IO::ind.mouse_position_.x << \" \" << IO::ind.mouse_position_.y;\n      lgr::emit() << \"pos: \" << s.abs_rect->x << \" \" << s.abs_rect->y;\n      if (Button::Contains(IO::ind.mouse_position_.x,\n                          IO::ind.mouse_position_.y)) {\n        lgr::emit() << \"here2\";\n        s.current_panel_data->is_hovered_ = true;\n        if (IO::ind.mouse_pressed_) {\n          s.current_panel_data->is_held_ = true;\n        } else {\n          s.current_panel_data->is_held_ = false;\n        }\n      } else {\n        s.current_panel_data->is_hovered_ = false;\n      }\n    };\n    IO::Declare::OnMouseMove(changeButtonPress);\n    Button::Declare::Draw();\n    Button::Declare::End();\n  }\n  Panel::Declare::End();\n}\n\nvoid CL_Draw() {\n\n  // Color clr(192,128,128, 128);\n  // if (IO::ind.mouse_button_ == omega::IO::MBTN_LEFT)\n  //   clr.set(192,128,128,255);\n\n  // Window::SetShape(\n  //     50, 50, 150, 150,\n  //     clr); // this isn't always going to be here\n  // Window::Draw();\n  // {\n  //   Window::SetShape(50, 50, 75, 75,\n  //                    Color(192, 128, 128, 192)); // needs to be relative to prev\n  //   Window::Draw();\n  // }\n\n  renderer.SetColor(255, 255, 255, 255);\n  renderer.RenderTextf(0, 300, 300, \"mouse x: %f    mouse y: %f\", omega::IO::ind.mouse_move_delta_.x, omega::IO::ind.mouse_move_delta_.y);\n  if (s.current_panel_data != nullptr)\n  renderer.RenderTextf(0, 300, 325, \"hovered: %d\", omega::s.current_panel_data->is_hovered_);\n  omega::dm.execute();\n  IO::EndFrame();\n  s.EndFrame();\n  s.brush.Cursor(IO::ind.mouse_position_, omega::kCursorArrow);\n\n\n  if (s.is_child) {\n    std::vector<int> v;\n    v.clear();\n  }\n  /*\n  **\n  ** OnPress could set a flag is_moving = true, could call a callback for a button, could say highlight this text\n  **\n  ** Shape& shape = Panel::Declare::Shape(50,50,150,150,Color(kColorWhite));\n  ** //IO::OnMouseMove(Panel::mover(shape)); // mover has to take ref shape\n  ** IO::WhenMouseInShape(shape, IO::OnMousePress(Panel::mover(shape) fp)); // there's a million things you might want to do after a mouse press - but it has its default behavior\n  **\n  **\n       */\n}\n\nvoid CL_MouseButton(int button, int state, int x, int y) {\n  if (state == GLUT_DOWN) {\n    if (button == GLUT_LEFT_BUTTON) {\n      omega::IO::MousePress(omega::IO::MBTN_LEFT);\n    } else if (button == GLUT_RIGHT_BUTTON) {\n      omega::IO::MousePress(omega::IO::MBTN_RIGHT);\n    }\n  } else if (state == GLUT_UP) {\n    if (button == GLUT_LEFT_BUTTON) {\n      omega::IO::MouseRelease(omega::IO::MBTN_LEFT);\n    } else if (button == GLUT_RIGHT_BUTTON) {\n      omega::IO::MouseRelease(omega::IO::MBTN_RIGHT);\n    }\n\n  }\n}\n\nvoid CL_MouseMove(int x, int y) {\n  omega::IO::MouseMove(x, y);\n}\n\nvoid CL_Keyboard(unsigned char key, int x, int y) {\n  if (key == 27 || key == 'q')\n    exit(0);\n\n  omega::IO::KeyPress(key);\n}\n\nvoid CL_Shutdown() {\n  renderer.DestroyFont(0);\n}\n",
+			"file": "test/client.cc",
+			"file_size": 5301,
+			"file_write_time": 132587435598828488,
+			"settings":
+			{
+				"buffer_size": 5314,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "omega.sublime-project",
+			"settings":
+			{
+				"buffer_size": 125,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/brush.cc",
+			"settings":
+			{
+				"buffer_size": 14206,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"projec",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"project",
+				"Project: Add Folder"
+			],
+			[
+				"lsp",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Discover Packages"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/joshj/Projects/omega",
+		"/Users/joshj/Projects/omega/source",
+		"/Users/joshj/Projects/omega/test"
+	],
+	"file_history":
+	[
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "test/client.cc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5314,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								563,
+								563
+							]
+						],
+						"settings":
+						{
+							"actual_mode": true,
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".<>:\"/",
+									"selector": "source.c++"
+								}
+							],
+							"av_input": true,
+							"lsp_active": true,
+							"lsp_language":
+							{
+								"clangd": "cpp"
+							},
+							"show_definitions": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 208.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "omega.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 125,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"actual_mode": true,
+							"av_input": true,
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "source/brush.cc",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 14206,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"actual_mode": true,
+							"av_input": true,
+							"lsp_active": true,
+							"lsp_language":
+							{
+								"clangd": "cpp"
+							},
+							"show_definitions": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.diagnostics":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "omega.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 199.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
